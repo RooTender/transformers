@@ -114,114 +114,114 @@
   - local: custom_models
     title: Udostępnianie własnego modelu
   - local: chat_templating
-    title: Templates for chat models
+    title: Szablony dla modeli czatu
   - local: trainer
-    title: Trainer
+    title: Trener
   - local: sagemaker
-    title: Run training on Amazon SageMaker
+    title: Trening z użyciem Amazon SageMaker
   - local: serialization
-    title: Export to ONNX
+    title: Eksport do ONNX
   - local: tflite
-    title: Export to TFLite
+    title: Eksport do TFLite
   - local: torchscript
-    title: Export to TorchScript
+    title: Eksport do TorchScript
   - local: benchmarks
-    title: Benchmarks
+    title: Benchmarki
   - local: notebooks
-    title: Notebooks with examples
+    title: Notatniki z przykładami
   - local: community
-    title: Community resources
+    title: Zasoby społeczności
   - local: custom_tools
-    title: Custom Tools and Prompts
+    title: Niestandardowe narzędzia i prompty
   - local: troubleshooting
-    title: Troubleshoot
+    title: Rozwiązywanie problemów
   - local: hf_quantizer
-    title: Contribute new quantization method
-  title: Developer guides
+    title: Współtworzenie nowych metod kwantyzacji
+  title: Przewodnik dla deweloperów
 - sections:
   - local: performance
-    title: Overview
+    title: Przegląd
   - local: quantization
-    title: Quantization
+    title: Kwantyzacja
   - sections:
     - local: perf_train_gpu_one
-      title: Methods and tools for efficient training on a single GPU
+      title: Metody i narzędzia do wydajnego treningu na pojedynczym GPU
     - local: perf_train_gpu_many
-      title: Multiple GPUs and parallelism
+      title: Wiele układów GPU i zrównoleglanie
     - local: fsdp
-      title: Fully Sharded Data Parallel
+      title: W pełni rozproszone zrównoleglone przetwarzanie danych
     - local: deepspeed
       title: DeepSpeed
     - local: perf_train_cpu
-      title: Efficient training on CPU
+      title: Wydajny trening na CPU
     - local: perf_train_cpu_many
-      title: Distributed CPU training
+      title: Rozproszony trening na CPU
     - local: perf_train_tpu_tf
-      title: Training on TPU with TensorFlow
+      title: Trening na TPU z TensorFlow
     - local: perf_train_special
-      title: PyTorch training on Apple silicon
+      title: Trening PyTorch na Apple Silicon
     - local: perf_hardware
-      title: Custom hardware for training
+      title: Niestandardowy sprzęt do treningu
     - local: hpo_train
-      title: Hyperparameter Search using Trainer API
-    title: Efficient training techniques
+      title: Wyszukiwanie hiperparametrów przy użyciu Trainer API
+    title: Wydajne metody treningu
   - sections:
     - local: perf_infer_cpu
-      title: CPU inference
+      title: Wnioskowanie z CPU
     - local: perf_infer_gpu_one
-      title: GPU inference
-    title: Optimizing inference
+      title: Wnioskowanie z GPU
+    title: Optymalizacja wnioskowania
   - local: big_models
-    title: Instantiate a big model
+    title: Instancjonowanie dużego modelu
   - local: debugging
-    title: Debugging
+    title: Debugowanie
   - local: tf_xla
-    title: XLA Integration for TensorFlow Models
+    title: Integracja XLA dla modeli TensorFlow
   - local: perf_torch_compile
-    title: Optimize inference using `torch.compile()`
-  title: Performance and scalability
+    title: Optymalizacja wnioskowania przy użyciu `torch.compile()`
+  title: Wydajność i skalowalnie
 - sections:
   - local: contributing
-    title: How to contribute to 🤗 Transformers?
+    title: Jak wesprzeć 🤗 Transformers?
   - local: add_new_model
-    title: How to add a model to 🤗 Transformers?
+    title: Jak dodać model do 🤗 Transformers?
   - local: add_tensorflow_model
-    title: How to convert a 🤗 Transformers model to TensorFlow?
+    title: Jak przekonwertować model z 🤗 Transformers na TensorFlow?
   - local: add_new_pipeline
-    title: How to add a pipeline to 🤗 Transformers?
+    title: Jak dodać potok do 🤗 Transformers?
   - local: testing
-    title: Testing
+    title: Testowanie
   - local: pr_checks
-    title: Checks on a Pull Request
+    title: Testy na Pull Requestach
   title: Contribute
 - sections:
   - local: philosophy
-    title: Philosophy
+    title: Filozofia
   - local: glossary
-    title: Glossary
+    title: Słownik
   - local: task_summary
-    title: What 🤗 Transformers can do
+    title: Co 🤗 Transformers może robić
   - local: tasks_explained
-    title: How 🤗 Transformers solve tasks
+    title: Jak 🤗 Transformers rozwiązuje zadania
   - local: model_summary
-    title: The Transformer model family
+    title: Rodzina modeli Transformerów
   - local: tokenizer_summary
-    title: Summary of the tokenizers
+    title: Podsumowanie tokenizatorów
   - local: attention
-    title: Attention mechanisms
+    title: Mechanizmy uwagi
   - local: pad_truncation
-    title: Padding and truncation
+    title: Wypełnianie i obcinanie
   - local: bertology
-    title: BERTology
+    title: BERTologia
   - local: perplexity
-    title: Perplexity of fixed-length models
+    title: Złożoność modeli o stałej długości
   - local: pipeline_webserver
-    title: Pipelines for webserver inference
+    title: Potoki do wnioskowania dla serwerów webowych
   - local: model_memory_anatomy
-    title: Model training anatomy
+    title: Anatomia treningu modeli
   - local: llm_tutorial_optimization
-    title: Getting the most out of LLMs
-  title: Conceptual guides
+    title: Jak najlepiej w pełni wykorzystywać LLMy
+  title: Przewodnik po koncepcjach
 - sections:
   - sections:
     - local: main_classes/agent
@@ -266,7 +266,7 @@
       title: Feature Extractor
     - local: main_classes/image_processor
       title: Image Processor
-    title: Main Classes
+    title: Główne klasy
   - sections:
     - isExpanded: false
       sections:
@@ -526,7 +526,7 @@
         title: XLNet
       - local: model_doc/yoso
         title: YOSO
-      title: Text models
+      title: Modele tekstowe
     - isExpanded: false
       sections:
       - local: model_doc/beit
@@ -629,7 +629,7 @@
         title: ViTMSN
       - local: model_doc/yolos
         title: YOLOS
-      title: Vision models
+      title: Modele wizyjne
     - isExpanded: false
       sections:
       - local: model_doc/audio-spectrogram-transformer
@@ -690,7 +690,7 @@
         title: XLS-R
       - local: model_doc/xlsr_wav2vec2
         title: XLSR-Wav2Vec2
-      title: Audio models
+      title: Modele audio
     - isExpanded: false
       sections:
       - local: model_doc/timesformer
@@ -699,7 +699,7 @@
         title: VideoMAE
       - local: model_doc/vivit
         title: ViViT
-      title: Video models
+      title: Modele wideo
     - isExpanded: false
       sections:
       - local: model_doc/align
@@ -802,14 +802,14 @@
         title: VisualBERT
       - local: model_doc/xclip
         title: X-CLIP
-      title: Multimodal models
+      title: Modele multimodalne
     - isExpanded: false
       sections:
       - local: model_doc/decision_transformer
         title: Decision Transformer
       - local: model_doc/trajectory_transformer
         title: Trajectory Transformer
-      title: Reinforcement learning models
+      title: Modele uczenia ze wzmocnieniem
     - isExpanded: false
       sections:
       - local: model_doc/autoformer
@@ -822,31 +822,31 @@
         title: PatchTST
       - local: model_doc/time_series_transformer
         title: Time Series Transformer
-      title: Time series models
+      title: Modele dot. szeregów czasowych
     - isExpanded: false
       sections:
       - local: model_doc/graphormer
         title: Graphormer
-      title: Graph models
-    title: Models
+      title: Modele grafowe
+    title: Modele
   - sections:
     - local: internal/modeling_utils
-      title: Custom Layers and Utilities
+      title: Niestandardowe warstwy i narzędzia
     - local: internal/pipelines_utils
-      title: Utilities for pipelines
+      title: Narzędzia do potoków
     - local: internal/tokenization_utils
-      title: Utilities for Tokenizers
+      title: Narzędzia do tokenizatorów
     - local: internal/trainer_utils
-      title: Utilities for Trainer
+      title: Narzędzia do trenerów
     - local: internal/generation_utils
-      title: Utilities for Generation
+      title: Narzędzia do generacji
     - local: internal/image_processing_utils
-      title: Utilities for Image Processors
+      title: Narzędzia do przetwarzania obrazów
     - local: internal/audio_utils
-      title: Utilities for Audio processing
+      title: Narzędzia do przetwarzania audio
     - local: internal/file_utils
-      title: General Utilities
+      title: Ogólne narzędzia
     - local: internal/time_series_utils
-      title: Utilities for Time Series
-    title: Internal Helpers
+      title: Narzędzia do szeregów czasowych
+    title: Pomoc wewnątrz
   title: API
