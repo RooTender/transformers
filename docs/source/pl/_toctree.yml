@@ -1,118 +1,118 @@
 - sections:
   - local: index
-    title: 🤗 Transformers
+    title: 🤗 Transformery
   - local: quicktour
-    title: Quick tour
+    title: Szybkie oprowadzenie
   - local: installation
-    title: Installation
-  title: Get started
+    title: Instalacja
+  title: Zaczynajmy
 - sections:
   - local: pipeline_tutorial
-    title: Run inference with pipelines
+    title: Uruchom wnioskowanie z potokami
   - local: autoclass_tutorial
-    title: Write portable code with AutoClass
+    title: Napisz przenośny kod z AutoClass
   - local: preprocessing
-    title: Preprocess data
+    title: Wstępne przetwarzanie danych
   - local: training
-    title: Fine-tune a pretrained model
+    title: Dostrajenie modelu
   - local: run_scripts
-    title: Train with a script
+    title: Trening ze skryptem
   - local: accelerate
-    title: Set up distributed training with 🤗 Accelerate
+    title: Konfiguracja treningu rozproszonego z 🤗 Accelerate
   - local: peft
-    title: Load and train adapters with 🤗 PEFT
+    title: Wczytywanie i trening adapterów z 🤗 PEFT
   - local: model_sharing
-    title: Share your model
+    title: Udostępnij swój model
   - local: transformers_agents
-    title: Agents
+    title: Agenty
   - local: llm_tutorial
-    title: Generation with LLMs
-  title: Tutorials
+    title: Generowanie z użyciem LLMów
+  title: Instruktaże
 - sections:
   - isExpanded: false
     sections:
     - local: tasks/sequence_classification
-      title: Text classification
+      title: Klasyfikacja tekstu
     - local: tasks/token_classification
-      title: Token classification
+      title: Klasyfikacja tokenów
     - local: tasks/question_answering
-      title: Question answering
+      title: Odpowiadanie na pytania
     - local: tasks/language_modeling
-      title: Causal language modeling
+      title: Modelowanie języka przyczynowego
     - local: tasks/masked_language_modeling
-      title: Masked language modeling
+      title: Modelowanie języka maskowanego
     - local: tasks/translation
-      title: Translation
+      title: Tłumaczenie
     - local: tasks/summarization
-      title: Summarization
+      title: Streszczanie
     - local: tasks/multiple_choice
-      title: Multiple choice
-    title: Natural Language Processing
+      title: Wielokrotny wybór
+    title: Przetwarzanie języka naturalnego
   - isExpanded: false
     sections:
     - local: tasks/audio_classification
-      title: Audio classification
+      title: Klasyfikacja audio
     - local: tasks/asr
-      title: Automatic speech recognition
+      title: Automatyczne rozpoznawanie mowy
     title: Audio
   - isExpanded: false
     sections:
     - local: tasks/image_classification
-      title: Image classification
+      title: Klasyfikacja obrazów
     - local: tasks/semantic_segmentation
-      title: Image segmentation
+      title: Segmentacja obrazów
     - local: tasks/video_classification
-      title: Video classification
+      title: Klasyfikacja wideo
     - local: tasks/object_detection
-      title: Object detection
+      title: Detekcja obiektów
     - local: tasks/zero_shot_object_detection
-      title: Zero-shot object detection
+      title: Detekcja obiektów w trybie zero-shot
     - local: tasks/zero_shot_image_classification
-      title: Zero-shot image classification
+      title: Klasyfikacja obrazów w trybie zero-shot
     - local: tasks/monocular_depth_estimation
-      title: Depth estimation
+      title: Określanie głębi
     - local: tasks/image_to_image
-      title: Image-to-Image
+      title: Obraz na obraz
     - local: tasks/image_feature_extraction
-      title: Image Feature Extraction
+      title: Ekstrakcja cech z obrazu
     - local: tasks/mask_generation
-      title: Mask Generation
+      title: Generowanie masek
     - local: tasks/knowledge_distillation_for_image_classification
-      title: Knowledge Distillation for Computer Vision
-    title: Computer Vision
+      title: Destylacja wiedzy dla wizji komputerowej
+    title: Wizja komputerowa
   - isExpanded: false
     sections:
     - local: tasks/image_captioning
-      title: Image captioning
+      title: Podpisywanie obrazów
     - local: tasks/document_question_answering
-      title: Document Question Answering
+      title: Odpowiadanie na pytania z dokumentów
     - local: tasks/visual_question_answering
-      title: Visual Question Answering
+      title: Odpowiadanie na pytania z obrazów
     - local: tasks/text-to-speech
-      title: Text to speech
-    title: Multimodal
+      title: Tekst na mowę
+    title: Multimodalność
   - isExpanded: false
     sections:
     - local: generation_strategies
-      title: Customize the generation strategy
-    title: Generation
+      title: Dostosowywanie strategii generowania
+    title: Generowanie
   - isExpanded: false
     sections:
     - local: tasks/idefics
-      title: Image tasks with IDEFICS
+      title: Zadania z obrazami przy użyciu IDEFICS
     - local: tasks/prompting
-      title: LLM prompting guide
+      title: Prompting LLMów
     title: Prompting
-  title: Task Guides
+  title: Instruktaże zadań
 - sections:
   - local: fast_tokenizers
-    title: Use fast tokenizers from 🤗 Tokenizers
+    title: Używanie szybkich tokenizatorów z 🤗 Tokenizers
   - local: multilingual
-    title: Run inference with multilingual models
+    title: Uruchamianie wnioskowania dla modeli wielojęzykowych
   - local: create_a_model
-    title: Use model-specific APIs
+    title: Używanie API modelu
   - local: custom_models
-    title: Share a custom model
+    title: Udostępnianie własnego modelu
   - local: chat_templating
     title: Templates for chat models
   - local: trainer
