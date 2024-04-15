@@ -14,11 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# General Utilities
+# Ogólne narzędzia
 
-This page lists all of Transformers general utility functions that are found in the file `utils.py`.
+Ta strona zawiera listę wszystkich ogólnych funkcji pomocnicznych do Transformers, które znajdują się w pliku `utils.py`.
 
-Most of those are only useful if you are studying the general code in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz ogólny kod w bibliotece.
 
 
 ## Enums and namedtuples

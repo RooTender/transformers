@@ -14,11 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Utilities for pipelines
+# Narzędzia do potoków
 
-This page lists all the utility functions the library provides for pipelines.
+Ta strona zawiera listę wszystkich funkcji pomocniczych, które biblioteka udostępnia dla potoków.
 
-Most of those are only useful if you are studying the code of the models in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz kod modeli z biblioteki.
 
 
 ## Argument handling

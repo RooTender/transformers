@@ -14,11 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Custom Layers and Utilities
+# Niestandardowe warstwy i narzędzia
 
-This page lists all the custom layers used by the library, as well as the utility functions it provides for modeling.
+Ta strona zawiera listę wszystkich niestandardowych warstw używanych przez bibliotekę, a także funkcje pomocnicze, które pomagają podczas tworzenia modeli.
 
-Most of those are only useful if you are studying the code of the models in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz kod modeli z biblioteki.
 
 
 ## Pytorch custom modules
