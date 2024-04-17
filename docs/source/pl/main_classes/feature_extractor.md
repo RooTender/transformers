@@ -16,7 +16,7 @@ rendered properly in your Markdown viewer.
 
 # Feature Extractor
 
-A feature extractor is in charge of preparing input features for audio or vision models. This includes feature extraction from sequences, e.g., pre-processing audio files to generate Log-Mel Spectrogram features, feature extraction from images, e.g., cropping image files, but also padding, normalization, and conversion to NumPy, PyTorch, and TensorFlow tensors.
+Ekstraktor cech jest odpowiedzialny za przygotowanie cech wejściowych dla modeli audio lub wizyjnych. Obejmuje to ekstrakcję cech z sekwencji, np. wstępne przetwarzanie plików audio w celu wygenerowania cech spektrogramu Log-Mel, ekstrakcję cech z obrazów, np. przycinanie plików graficznych, ale także wypełnianie, normalizację i konwersję do NumPy, PyTorch czy TensorFlow.
 
 
 ## FeatureExtractionMixin

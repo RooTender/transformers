@@ -16,47 +16,34 @@ rendered properly in your Markdown viewer.
 
 # Callbacks
 
-Callbacks are objects that can customize the behavior of the training loop in the PyTorch
-[`Trainer`] (this feature is not yet implemented in TensorFlow) that can inspect the training loop
-state (for progress reporting, logging on TensorBoard or other ML platforms...) and take decisions (like early
-stopping).
+Wywołania zwrotne to obiekty, które mogą dostosować zachowanie pętli treningowej w PyTorch [`Trainer`] (ta funkcja nie została jeszcze zaimplementowana w TensorFlow), które mogą sprawdzać stan pętli treningowej (w celu raportowania postępów, logowania na TensorBoard lub innych platformach ML) i podejmować decyzje (takie jak wczesne zatrzymanie (ang. _early stopping_)).
 
-Callbacks are "read only" pieces of code, apart from the [`TrainerControl`] object they return, they
-cannot change anything in the training loop. For customizations that require changes in the training loop, you should
-subclass [`Trainer`] and override the methods you need (see [trainer](trainer) for examples).
+Wywołania zwrotne są fragmentami kodu "tylko do odczytu", poza obiektem zwracanym przez [`TrainerControl`], i nie mogą zmienić niczego w pętli treningowej. W przypadku dostosowań, które wymagają zmian w pętli treningowej, powinieneś stworzyć podklasę klasy [`Trainer`] i przeciążyć odpowiednie metody (zobacz [trainer](trainer) dla przykładów).
 
-By default, `TrainingArguments.report_to` is set to `"all"`, so a [`Trainer`] will use the following callbacks.
+Domyślnie `TrainingArguments.report_to` jest ustawione na `"all"`, więc [`Trainer`] użyje następujących wywołań zwrotnych:
 
-- [`DefaultFlowCallback`] which handles the default behavior for logging, saving and evaluation.
-- [`PrinterCallback`] or [`ProgressCallback`] to display progress and print the
-  logs (the first one is used if you deactivate tqdm through the [`TrainingArguments`], otherwise
-  it's the second one).
-- [`~integrations.TensorBoardCallback`] if tensorboard is accessible (either through PyTorch >= 1.4
-  or tensorboardX).
-- [`~integrations.WandbCallback`] if [wandb](https://www.wandb.com/) is installed.
-- [`~integrations.CometCallback`] if [comet_ml](https://www.comet.ml/site/) is installed.
-- [`~integrations.MLflowCallback`] if [mlflow](https://www.mlflow.org/) is installed.
-- [`~integrations.NeptuneCallback`] if [neptune](https://neptune.ai/) is installed.
-- [`~integrations.AzureMLCallback`] if [azureml-sdk](https://pypi.org/project/azureml-sdk/) is
-  installed.
-- [`~integrations.CodeCarbonCallback`] if [codecarbon](https://pypi.org/project/codecarbon/) is
-  installed.
-- [`~integrations.ClearMLCallback`] if [clearml](https://github.com/allegroai/clearml) is installed.
-- [`~integrations.DagsHubCallback`] if [dagshub](https://dagshub.com/) is installed.
-- [`~integrations.FlyteCallback`] if [flyte](https://flyte.org/) is installed.
-- [`~integrations.DVCLiveCallback`] if [dvclive](https://dvc.org/doc/dvclive) is installed.
+- [`DefaultFlowCallback`], który obsługuje domyślne zachowanie logowania, zapisywania i ewaluacji.
+- [`PrinterCallback`] albo [`ProgressCallback`] do wyświetlania postępu i logów (pierwszy jest używany, jeśli dezaktywujesz tqdm przez [`TrainingArguments`], w przeciwnym razie jest to drugi).
+- [`~integrations.TensorBoardCallback`] jeśli tensorboard jest dostępny (przez PyTorch >= 1.4 lub tensorboardX).
+- [`~integrations.WandbCallback`] jeśli [wandb](https://www.wandb.com/) jest zainstalowany.
+- [`~integrations.CometCallback`] jeśli zainstalowano [comet_ml](https://www.comet.ml/site/).
+- [`~integrations.MLflowCallback`] jeśli zainstalowano [mlflow](https://www.mlflow.org/).
+- [`~integrations.NeptuneCallback`] jeśli zainstalowano [neptune](https://neptune.ai/).
+- [`~integrations.AzureMLCallback`] jeśli zainstalowano [azureml-sdk](https://pypi.org/project/azureml-sdk/).
+- [`~integrations.CodeCarbonCallback`] jeśli zainstalowano [codecarbon](https://pypi.org/project/codecarbon/).
+- [`~integrations.ClearMLCallback`] jeśli zainstalowano [clearml](https://github.com/allegroai/clearml).
+- [`~integrations.DagsHubCallback`] jeśli zainstalowano [dagshub](https://dagshub.com/).
+- [`~integrations.FlyteCallback`] jeśli zainstalowano [flyte](https://flyte.org/).
+- [`~integrations.DVCLiveCallback`] jeśli zainstalowano [dvclive](https://dvc.org/doc/dvclive).
 
-If a package is installed but you don't wish to use the accompanying integration, you can change `TrainingArguments.report_to` to a list of just those integrations you want to use (e.g. `["azure_ml", "wandb"]`). 
+Jeśli pakiet jest zainstalowany, ale nie chcesz korzystać z towarzyszącej mu integracji, możesz zmienić `TrainingArguments.report_to` na listę tylko tych integracji, których chcesz użyć (np. `["azure_ml", "wandb"]`).
 
-The main class that implements callbacks is [`TrainerCallback`]. It gets the
-[`TrainingArguments`] used to instantiate the [`Trainer`], can access that
-Trainer's internal state via [`TrainerState`], and can take some actions on the training loop via
-[`TrainerControl`].
+Główną klasą implementującą wywołania zwrotne jest [`TrainerCallback`]. Pobiera ona [`TrainingArguments`] używane do tworzenia instancji [`Trainer`], może uzyskać dostęp do wewnętrznego stanu tego trenera za pośrednictwem [`TrainerState`] i może podejmować pewne działania w pętli treningowej za pośrednictwem [`TrainerControl`].
 
 
 ## Available Callbacks
 
-Here is the list of the available [`TrainerCallback`] in the library:
+Oto lista dostępnych [`TrainerCallback`] w bibliotece:
 
 [[autodoc]] integrations.CometCallback
     - setup
@@ -96,7 +83,7 @@ Here is the list of the available [`TrainerCallback`] in the library:
 
 [[autodoc]] TrainerCallback
 
-Here is an example of how to register a custom callback with the PyTorch [`Trainer`]:
+Oto przykład, jak zarejestrować niestandardowe wywołanie zwrotne w PyTorch [`Trainer`]:
 
 ```python
 class MyCallback(TrainerCallback):
@@ -115,7 +102,7 @@ trainer = Trainer(
 )
 ```
 
-Another way to register a callback is to call `trainer.add_callback()` as follows:
+Innym sposobem na zarejestrowanie wywołania zwrotnego jest użycie `trainer.add_callback()` w następujący sposób:
 
 ```python
 trainer = Trainer(...)

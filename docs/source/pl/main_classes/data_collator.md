@@ -16,14 +16,11 @@ rendered properly in your Markdown viewer.
 
 # Data Collator
 
-Data collators are objects that will form a batch by using a list of dataset elements as input. These elements are of
-the same type as the elements of `train_dataset` or `eval_dataset`.
+Kolatory danych to obiekty, które tworzą wsad (ang. _batch_) przy użyciu listy elementów zbioru danych jako danych wejściowych. Elementy te są tego samego typu co elementy `train_dataset` lub `eval_dataset`.
 
-To be able to build batches, data collators may apply some processing (like padding). Some of them (like
-[`DataCollatorForLanguageModeling`]) also apply some random data augmentation (like random masking)
-on the formed batch.
+Aby móc tworzyć wsady, kolatory danych mogą stosować pewne przetwarzanie (np. wypełnianie). Niektóre z nich (jak np. [`DataCollatorForLanguageModeling`]) stosują również pewne losowe rozszerzenie danych (np. losowe maskowanie) na utworzonej partii.
 
-Examples of use can be found in the [example scripts](../examples) or [example notebooks](../notebooks).
+Przykłady użycia można znaleźć w [example scripts](../examples) lub [example notes](../notebooks).
 
 
 ## Default data collator
