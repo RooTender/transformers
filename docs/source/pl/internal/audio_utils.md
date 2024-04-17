@@ -14,11 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Utilities for `FeatureExtractors`
+# Narzędzia do `FeatureExtractors`
 
-This page lists all the utility functions that can be used by the audio [`FeatureExtractor`] in order to compute special features from a raw audio using common algorithms such as *Short Time Fourier Transform* or *log mel spectrogram*.
+Ta strona zawiera listę wszystkich funkcji użytkowych, które mogą być używane przez audio [`FeatureExtractor`] w celu obliczenia specjalnych cech z surowego dźwięku przy użyciu popularnych algorytmów, takich jak *Krótkoczasowa transformata Fouriera* lub *spektrogram w logarytmicznej skali melowej*.
 
-Most of those are only useful if you are studying the code of the audio processors in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz kod procesorów audio w bibliotece.
 
 ## Audio Transformations
 

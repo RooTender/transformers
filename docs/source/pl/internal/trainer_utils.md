@@ -14,11 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Utilities for Trainer
+# Narzędzia do trenerów
 
-This page lists all the utility functions used by [`Trainer`].
+Ta strona zawiera listę wszystkich funkcji pomocniczych używanych przez [`Trainer`].
 
-Most of those are only useful if you are studying the code of the Trainer in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz kod klasy Trainer z biblioteki.
 
 ## Utilities
 

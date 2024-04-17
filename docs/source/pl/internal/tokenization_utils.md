@@ -14,14 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Utilities for Tokenizers
+# Narzędzia do tokenizatorów
 
-This page lists all the utility functions used by the tokenizers, mainly the class
-[`~tokenization_utils_base.PreTrainedTokenizerBase`] that implements the common methods between
-[`PreTrainedTokenizer`] and [`PreTrainedTokenizerFast`] and the mixin
-[`~tokenization_utils_base.SpecialTokensMixin`].
+Ta strona zawiera listę wszystkich funkcji pomocniczych używanych przez tokenizatory, głównie klasę [`~tokenization_utils_base.PreTrainedTokenizerBase`], która implementuje metody wspólne dla [`PreTrainedTokenizer`] i [`PreTrainedTokenizerFast`] oraz mixin [`~tokenization_utils_base.SpecialTokensMixin`].
 
-Most of those are only useful if you are studying the code of the tokenizers in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz kod tokenizatorów z biblioteki.
 
 ## PreTrainedTokenizerBase
 

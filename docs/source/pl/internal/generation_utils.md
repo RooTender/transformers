@@ -14,17 +14,17 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Utilities for Generation
+# Narzędzia do generacji
 
-This page lists all the utility functions used by [`~generation.GenerationMixin.generate`].
+Ta strona zawiera listę wszystkich funkcji pomocnicznych używanych przez [`~generation.GenerationMixin.generate`].
 
-## Generate Outputs
+## Generowanie danych wyjściowych
 
-The output of [`~generation.GenerationMixin.generate`] is an instance of a subclass of
-[`~utils.ModelOutput`]. This output is a data structure containing all the information returned
-by [`~generation.GenerationMixin.generate`], but that can also be used as tuple or dictionary.
+Wyjście [`~generation.GenerationMixin.generate`] jest instancją podklasy [`~utils.ModelOutput`].
+[`~utils.ModelOutput`]. To wyjście jest strukturą danych zawierającą wszystkie informacje zwrócone przez
+przez [`~generation.GenerationMixin.generate`], ale może być również użyta jako krotka lub słownik.
 
-Here's an example:
+Przykład:
 
 ```python
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
@@ -36,34 +36,28 @@ inputs = tokenizer("Hello, my dog is cute and ", return_tensors="pt")
 generation_output = model.generate(**inputs, return_dict_in_generate=True, output_scores=True)
 ```
 
-The `generation_output` object is a [`~generation.GenerateDecoderOnlyOutput`], as we can
-see in the documentation of that class below, it means it has the following attributes:
+Obiekt `generation_output` jest [`~generation.GenerateDecoderOnlyOutput`], jak możemy zobaczyć w dokumentacji tej klasy poniżej. Oznacza to, że posiada następujące atrybuty:
 
-- `sequences`: the generated sequences of tokens
-- `scores` (optional): the prediction scores of the language modelling head, for each generation step
-- `hidden_states` (optional): the hidden states of the model, for each generation step
-- `attentions` (optional): the attention weights of the model, for each generation step
+- `sequences`: wygenerowane sekwencje tokenów
+- `scores` (opcjonalnie): wyniki predykcji głowicy modelującej język, dla każdego kroku generacji
+- `hidden_states` (opcjonalnie): ukryte stany modelu, dla każdego kroku generacji
+- `attentions` (opcjonalne): wagi uwagi modelu, dla każdego kroku generacji
 
-Here we have the `scores` since we passed along `output_scores=True`, but we don't have `hidden_states` and
-`attentions` because we didn't pass `output_hidden_states=True` or `output_attentions=True`.
+Tutaj mamy `scores`, ponieważ przekazaliśmy `output_scores=True`, ale nie mamy `hidden_states` i `attentions`, ponieważ nie przekazaliśmy `output_hidden_states=True` lub `output_attentions=True`.
 
-You can access each attribute as you would usually do, and if that attribute has not been returned by the model, you
-will get `None`. Here for instance `generation_output.scores` are all the generated prediction scores of the
-language modeling head, and `generation_output.attentions` is `None`.
+Możesz uzyskać dostęp do każdego atrybutu tak, jak zazwyczaj, a jeśli ten atrybut nie został zwrócony przez model to otrzymasz `None`. Tutaj na przykład `generation_output.scores` to wszystkie wygenerowane wyniki predykcji głowicy modelującej język, a `generation_output.attentions` to `None`.
 
-When using our `generation_output` object as a tuple, it only keeps the attributes that don't have `None` values.
-Here, for instance, it has two elements, `loss` then `logits`, so
+Kiedy używamy naszego obiektu `generation_output` jako krotki, zachowuje on tylko atrybuty, które nie mają wartości `None`. Tutaj, na przykład, ma dwa elementy, `loss` i `logits`, więc
 
 ```python
 generation_output[:2]
 ```
 
-will return the tuple `(generation_output.sequences, generation_output.scores)` for instance.
+zwróci krotkę `(generation_output.sequences, generation_output.scores)`.
 
-When using our `generation_output` object as a dictionary, it only keeps the attributes that don't have `None`
-values. Here, for instance, it has two keys that are `sequences` and `scores`.
+Kiedy używamy naszego obiektu `generation_output` jako słownika, przechowuje on tylko atrybuty, które nie mają wartości `None`. Tutaj, na przykład, ma dwa klucze, które są `sequences` i `scores`.
 
-We document here all output types.
+Dokumentujemy tutaj wszystkie typy wyjść.
 
 
 ### PyTorch
@@ -296,7 +290,7 @@ generation.
 
 ## StoppingCriteria
 
-A [`StoppingCriteria`] can be used to change when to stop generation (other than EOS token). Please note that this is exclusively available to our PyTorch implementations.
+A [`StoppingCriteria`] może być użyty do zmiany momentu zatrzymania generowania (innego niż token EOS). Należy pamiętać, że jest to dostępne wyłącznie dla naszych implementacji PyTorch.
 
 [[autodoc]] StoppingCriteria
     - __call__
@@ -312,7 +306,7 @@ A [`StoppingCriteria`] can be used to change when to stop generation (other than
 
 ## Constraints
 
-A [`Constraint`] can be used to force the generation to include specific tokens or sequences in the output. Please note that this is exclusively available to our PyTorch implementations.
+Można użyć [`Constraint`], aby wymusić generowanie określonych tokenów lub sekwencji na wyjściu. Należy pamiętać, że jest to dostępne wyłącznie dla naszych implementacji PyTorch.
 
 [[autodoc]] Constraint
 

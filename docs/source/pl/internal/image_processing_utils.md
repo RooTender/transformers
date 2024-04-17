@@ -14,12 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Utilities for Image Processors
+# Narzędzia do przetwarzania obrazów
 
-This page lists all the utility functions used by the image processors, mainly the functional
-transformations used to process the images.
+Ta strona zawiera listę wszystkich funkcji pomocnicznych używanych przez procesory obrazu. Głównie transformacje do przetwarzania obrazów.
 
-Most of those are only useful if you are studying the code of the image processors in the library.
+Większość z nich jest przydatna tylko wtedy, gdy studiujesz kod dot. przetwarzania obrazów z biblioteki.
 
 ## Image Transformations
 

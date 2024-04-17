@@ -14,11 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Time Series Utilities
+# Narzędzia do szeregów czasowych
 
-This page lists all the utility functions and classes that can be used for Time Series based models.
+Ta strona zawiera listę wszystkich funkcji pomocniczych i klas, które mogą być używane w modelach badających szeregi czasowe.
 
-Most of those are only useful if you are studying the code of the time series models or you wish to add to the collection of distributional output classes.
+Większość z nich jest przydatna głównie wtedy, gdy analizujesz kod modeli szeregów czasowych lub gdy chcesz rozszerzyć zbiór klas wyjściowych dystrybucji.
 
 ## Distributional Output
 
