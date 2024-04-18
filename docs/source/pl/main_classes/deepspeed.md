@@ -16,7 +16,7 @@ rendered properly in your Markdown viewer.
 
 # DeepSpeed
 
-[DeepSpeed](https://github.com/microsoft/DeepSpeed), obsługiwana przez Zero Redundancy Optimizer (ZeRO), to biblioteka optymalizująca trening i dopasowywanie (ang. _fitting_) bardzo dużych modeli pracujących na GPU. Jest ona dostępna w kilku etapach ZeRO, gdzie każdy z nich stopniowo oszczędza coraz więcej pamięci GPU poprzez partycjonowanie stanu optymalizatora, gradientów oraz parametrów, co umożliwia odciążenie CPU lub NVMe. DeepSpeed jest zintegrowany z klasą [`Trainer`], a większość konfiguracji jest wykonywana automatycznie.
+[DeepSpeed](https://github.com/microsoft/DeepSpeed), obsługiwana przez Zero Redundancy Optimizer (ZeRO), to biblioteka optymalizująca trening i dopasowywanie (ang. *fitting*) bardzo dużych modeli pracujących na GPU. Jest ona dostępna w kilku etapach ZeRO, gdzie każdy z nich stopniowo oszczędza coraz więcej pamięci GPU poprzez partycjonowanie stanu optymalizatora, gradientów oraz parametrów, co umożliwia odciążenie CPU lub NVMe. DeepSpeed jest zintegrowany z klasą [`Trainer`], a większość konfiguracji jest wykonywana automatycznie.
 
 Jednakże, jeśli chcesz używać DeepSpeed bez [`Trainer`], Transformers posiada klasę [`HfDeepSpeedConfig`].
 

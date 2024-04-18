@@ -16,7 +16,7 @@ rendered properly in your Markdown viewer.
 
 # Callbacks
 
-Wywołania zwrotne to obiekty, które mogą dostosować zachowanie pętli treningowej w PyTorch [`Trainer`] (ta funkcja nie została jeszcze zaimplementowana w TensorFlow), które mogą sprawdzać stan pętli treningowej (w celu raportowania postępów, logowania na TensorBoard lub innych platformach ML) i podejmować decyzje (takie jak wczesne zatrzymanie (ang. _early stopping_)).
+Wywołania zwrotne to obiekty, które mogą dostosować zachowanie pętli treningowej w PyTorch [`Trainer`] (ta funkcja nie została jeszcze zaimplementowana w TensorFlow), które mogą sprawdzać stan pętli treningowej (w celu raportowania postępów, logowania na TensorBoard lub innych platformach ML) i podejmować decyzje (takie jak wczesne zatrzymanie (ang. *early stopping*)).
 
 Wywołania zwrotne są fragmentami kodu "tylko do odczytu", poza obiektem zwracanym przez [`TrainerControl`], i nie mogą zmienić niczego w pętli treningowej. W przypadku dostosowań, które wymagają zmian w pętli treningowej, powinieneś stworzyć podklasę klasy [`Trainer`] i przeciążyć odpowiednie metody (zobacz [trainer](trainer) dla przykładów).
 

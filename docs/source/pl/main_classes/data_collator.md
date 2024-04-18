@@ -16,7 +16,7 @@ rendered properly in your Markdown viewer.
 
 # Data Collator
 
-Kolatory danych to obiekty, które tworzą wsad (ang. _batch_) przy użyciu listy elementów zbioru danych jako danych wejściowych. Elementy te są tego samego typu co elementy `train_dataset` lub `eval_dataset`.
+Kolatory danych to obiekty, które tworzą wsad (ang. *batch*) przy użyciu listy elementów zbioru danych jako danych wejściowych. Elementy te są tego samego typu co elementy `train_dataset` lub `eval_dataset`.
 
 Aby móc tworzyć wsady, kolatory danych mogą stosować pewne przetwarzanie (np. wypełnianie). Niektóre z nich (jak np. [`DataCollatorForLanguageModeling`]) stosują również pewne losowe rozszerzenie danych (np. losowe maskowanie) na utworzonej partii.
 

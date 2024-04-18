@@ -16,7 +16,7 @@ rendered properly in your Markdown viewer.
 
 # Backbone
 
-Szkielet (ang. _Backbone_) jest modelem używanym do ekstrakcji cech dla zadań wizji komputerowej wyższego poziomu, takich jak wykrywanie obiektów i klasyfikacja obrazów. Transformers udostępnia klasę [`AutoBackbone`] do inicjalizacji modelu z Transformers na podstawie wstępnie wytrenowanych wag modelu oraz dwie klasy użytkowe:
+Szkielet (ang. *Backbone*) jest modelem używanym do ekstrakcji cech dla zadań wizji komputerowej wyższego poziomu, takich jak wykrywanie obiektów i klasyfikacja obrazów. Transformers udostępnia klasę [`AutoBackbone`] do inicjalizacji modelu z Transformers na podstawie wstępnie wytrenowanych wag modelu oraz dwie klasy użytkowe:
 
 * [`~utils.BackboneMixin`] umożliwia inicjalizację szkieletu z Transformers lub [timm](https://hf.co/docs/timm/index) i zawiera funkcje do zwracania wyjściowych cech i indeksów.
 * [`~utils.BackboneConfigMixin`] ustawia wyjściowe cechy i indeksy konfiguracji szkieletu.
