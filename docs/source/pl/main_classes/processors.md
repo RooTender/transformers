@@ -16,28 +16,21 @@ rendered properly in your Markdown viewer.
 
 # Processors
 
-Processors can mean two different things in the Transformers library:
-- the objects that pre-process inputs for multi-modal models such as [Wav2Vec2](../model_doc/wav2vec2) (speech and text)
-  or [CLIP](../model_doc/clip) (text and vision)
-- deprecated objects that were used in older versions of the library to preprocess data for GLUE or SQUAD.
+Procesory mogą oznaczać dwie różne rzeczy w bibliotece Transformers:
+- obiekty, które wstępnie przetwarzają dane wejściowe dla modeli multimodalnych, takich jak [Wav2Vec2](../model_doc/wav2vec2) (mowa i tekst) lub [CLIP](../model_doc/clip) (tekst i wizja).
+- wycofane obiekty, które były używane w starszych wersjach biblioteki do wstępnego przetwarzania danych dla GLUE lub SQUAD.
 
 ## Multi-modal processors
 
-Any multi-modal model will require an object to encode or decode the data that groups several modalities (among text,
-vision and audio). This is handled by objects called processors, which group together two or more processing objects
-such as tokenizers (for the text modality), image processors (for vision) and feature extractors (for audio).
+Każdy model multimodalny będzie wymagał obiektu do kodowania lub dekodowania danych, które grupują kilka modalności (między tekstem, wizją i dźwiękiem). Jest to obsługiwane przez obiekty zwane procesorami, które grupują dwa lub więcej obiektów przetwarzania, takich jak tokenizatory (dla modalności tekstowej), procesory obrazu (dla wizji) i ekstraktory cech (dla dźwięku).
 
-Those processors inherit from the following base class that implements the saving and loading functionality:
+Procesory te dziedziczą z następującej klasy bazowej, która implementuje funkcje zapisywania i ładowania:
 
 [[autodoc]] ProcessorMixin
 
 ## Deprecated processors
 
-All processors follow the same architecture which is that of the
-[`~data.processors.utils.DataProcessor`]. The processor returns a list of
-[`~data.processors.utils.InputExample`]. These
-[`~data.processors.utils.InputExample`] can be converted to
-[`~data.processors.utils.InputFeatures`] in order to be fed to the model.
+Wszystkie procesory są zgodne z tą samą architekturą, którą jest  [`~data.processors.utils.DataProcessor`]. Zwraca ona listę [`~data.processors.utils.InputExample`]. Te [`~data.processors.utils.InputExample`] mogą zostać przekonwertowane na [`~data.processors.utils.InputFeatures`] w celu wprowadzenia ich do modelu.
 
 [[autodoc]] data.processors.utils.DataProcessor
 
@@ -47,14 +40,11 @@ All processors follow the same architecture which is that of the
 
 ## GLUE
 
-[General Language Understanding Evaluation (GLUE)](https://gluebenchmark.com/) is a benchmark that evaluates the
-performance of models across a diverse set of existing NLU tasks. It was released together with the paper [GLUE: A
-multi-task benchmark and analysis platform for natural language understanding](https://openreview.net/pdf?id=rJ4km2R5t7)
+[General Language Understanding Evaluation (GLUE)](https://gluebenchmark.com/) to test benchmarkowy, który ocenia wydajność modeli w zróżnicowanym zestawie istniejących zadań NLU (ang. *Natural Language Understading*). Został on wydany wraz z artykułem [GLUE: A multi-task benchmark and analysis platform for natural language understanding] (https://openreview.net/pdf?id=rJ4km2R5t7).
 
-This library hosts a total of 10 processors for the following tasks: MRPC, MNLI, MNLI (mismatched), CoLA, SST2, STSB,
-QQP, QNLI, RTE and WNLI.
+Biblioteka ta obsługuje łącznie 10 procesorów dla następujących zadań: MRPC, MNLI, MNLI (bez dopasowania), CoLA, SST2, STSB, QQP, QNLI, RTE i WNLI.
 
-Those processors are:
+Te procesory to:
 
 - [`~data.processors.utils.MrpcProcessor`]
 - [`~data.processors.utils.MnliProcessor`]
@@ -66,63 +56,55 @@ Those processors are:
 - [`~data.processors.utils.RteProcessor`]
 - [`~data.processors.utils.WnliProcessor`]
 
-Additionally, the following method can be used to load values from a data file and convert them to a list of
-[`~data.processors.utils.InputExample`].
+Dodatkowo, poniższa metoda może być użyta do wczytania wartości z pliku danych i przekonwertowania ich na listę [`~data.processors.utils.InputExample`].
 
 [[autodoc]] data.processors.glue.glue_convert_examples_to_features
 
 
 ## XNLI
 
-[The Cross-Lingual NLI Corpus (XNLI)](https://www.nyu.edu/projects/bowman/xnli/) is a benchmark that evaluates the
-quality of cross-lingual text representations. XNLI is crowd-sourced dataset based on [*MultiNLI*](http://www.nyu.edu/projects/bowman/multinli/): pairs of text are labeled with textual entailment annotations for 15
-different languages (including both high-resource language such as English and low-resource languages such as Swahili).
+[The Cross-Lingual NLI Corpus (XNLI)](https://www.nyu.edu/projects/bowman/xnli/) jest benchmarkiem, który ocenia jakość międzyjęzykowych reprezentacji tekstu. XNLI jest zbiorem danych stworzonym przez społeczność (crowd-sourcing), opartym na [*MultiNLI*](http://www.nyu.edu/projects/bowman/multinli/): pary tekstów są oznaczone tekstowymi adnotacjami dla 15 różnych języków (w tym zarówno języków dla których istnieje wiele danych treningowych, takich jak angielski i przeciwnie, takich jak suahili).
 
-It was released together with the paper [XNLI: Evaluating Cross-lingual Sentence Representations](https://arxiv.org/abs/1809.05053)
+Został on opublikowany wraz z artykułem [XNLI: Evaluating Cross-lingual Sentence Representations](https://arxiv.org/abs/1809.05053).
 
-This library hosts the processor to load the XNLI data:
+Ta biblioteka obsługuje procesor do wczytywania danych XNLI:
 
 - [`~data.processors.utils.XnliProcessor`]
 
-Please note that since the gold labels are available on the test set, evaluation is performed on the test set.
+Należy pamiętać, że ponieważ "złote" etykiety (ręcznie przygotowywane) są dostępne w zbiorze testowym to ewaluacja jest przeprowadzana również na zbiorze testowym.
 
-An example using these processors is given in the [run_xnli.py](https://github.com/huggingface/transformers/tree/main/examples/pytorch/text-classification/run_xnli.py) script.
+Przykład użycia tych procesorów podano w skrypcie [run_xnli.py](https://github.com/huggingface/transformers/tree/main/examples/pytorch/text-classification/run_xnli.py).
 
 
 ## SQuAD
 
-[The Stanford Question Answering Dataset (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer//) is a benchmark that
-evaluates the performance of models on question answering. Two versions are available, v1.1 and v2.0. The first version
-(v1.1) was released together with the paper [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/abs/1606.05250). The second version (v2.0) was released alongside the paper [Know What You Don't
-Know: Unanswerable Questions for SQuAD](https://arxiv.org/abs/1806.03822).
+[Stanford Question Answering Dataset (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer//) to benchmark, który ocenia wydajność modeli odpowiadających na pytania (ang. *Question Answering*). Dostępne są dwie wersje, v1.1 i v2.0. Pierwsza wersja (v1.1) została wydana wraz z artykułem [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/abs/1606.05250). Druga wersja (v2.0) została wydana wraz z artykułem [Know What You Don't Know: Unanswerable Questions for SQuAD](https://arxiv.org/abs/1806.03822).
 
-This library hosts a processor for each of the two versions:
+Ta biblioteka zawiera procesor dla każdej z dwóch wersji:
 
 ### Processors
 
-Those processors are:
+Te procesory to:
 
 - [`~data.processors.utils.SquadV1Processor`]
 - [`~data.processors.utils.SquadV2Processor`]
 
-They both inherit from the abstract class [`~data.processors.utils.SquadProcessor`]
+Obie dziedziczą po abstrakcyjnej klasie [`~data.processors.utils.SquadProcessor`].
 
 [[autodoc]] data.processors.squad.SquadProcessor
     - all
 
-Additionally, the following method can be used to convert SQuAD examples into
-[`~data.processors.utils.SquadFeatures`] that can be used as model inputs.
+Dodatkowo, poniższa metoda może być użyta do konwersji przykładów SQuAD na [`~data.processors.utils.SquadFeatures`], które mogą być użyte jako dane wejściowe modelu.
 
 [[autodoc]] data.processors.squad.squad_convert_examples_to_features
 
 
-These processors as well as the aforementioned method can be used with files containing the data as well as with the
-*tensorflow_datasets* package. Examples are given below.
+Procesory te, jak również wspomniana wcześniej metoda, mogą być używane z plikami zawierającymi dane, jak również z paczką *tensorflow_datasets*. Przykłady podano poniżej.
 
 
 ### Example usage
 
-Here is an example using the processors as well as the conversion method using data files:
+Poniżej znajduje się przykład wykorzystujący procesory, a także metodę konwersji przy użyciu plików danych:
 
 ```python
 # Loading a V2 processor
@@ -143,7 +125,7 @@ features = squad_convert_examples_to_features(
 )
 ```
 
-Using *tensorflow_datasets* is as easy as using a data file:
+Używanie *tensorflow_datasets* jest tak proste, jak używanie pliku danych:
 
 ```python
 # tensorflow_datasets only handle Squad V1.
@@ -160,4 +142,4 @@ features = squad_convert_examples_to_features(
 )
 ```
 
-Another example using these processors is given in the [run_squad.py](https://github.com/huggingface/transformers/tree/main/examples/legacy/question-answering/run_squad.py) script.
+Inny przykład użycia tych procesorów podano w skrypcie [run_squad.py](https://github.com/huggingface/transformers/tree/main/examples/legacy/question-answering/run_squad.py).
