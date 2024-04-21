@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Trainer
+# Trenerzy
 
 Klasa [`Trainer`] oferuje kompleksowe API do trenowania modeli w PyTorch, wspierając jednocześnie trening rozproszony na wielu GPU/TPU, mieszaną precyzję dla [NVIDIA GPUs](https://nvidia.github.io/apex/), [AMD GPUs](https://rocm.docs.amd.com/en/latest/rocm.html) i [`torch.amp`](https://pytorch.org/docs/stable/amp.html) dla PyTorch. Klasa [`Trainer`] działa w parze z klasą [`TrainingArguments`], która oferuje szeroki zakres opcji dostosowywania sposobu trenowania modelu. Razem te dwie klasy zapewniają kompletne API trenowania.
 

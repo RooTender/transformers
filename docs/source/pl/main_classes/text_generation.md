@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Generation
+# Generowanie
 
 Każdy framework posiada metodę generowania tekstu zaimplementowaną w odpowiedniej klasie `GenerationMixin`:
 

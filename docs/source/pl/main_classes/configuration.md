@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Configuration
+# Konfiguracja
 
 Klasa bazowa [`PretrainedConfig`] implementuje wspólne metody do wczytywania/zapisu konfiguracji z lokalnego pliku lub katalogu, lub z wstępnie wytrenowanej konfiguracji modelu dostarczonej przez bibliotekę (pobranej z repozytorium AWS S3 HuggingFace).
 

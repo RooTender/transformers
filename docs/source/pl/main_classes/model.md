@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Models
+# Modele
 
 Klasy bazowe [`PreTrainedModel`], [`TFPreTrainedModel`] i [`FlaxPreTrainedModel`] implementują wspólne metody wczytywania/zapisu modelu albo z lokalnego pliku lub katalogu, albo z konfiguracji wstępnie wytrenowanego modelu dostarczonej przez bibliotekę (pobranej z repozytorium AWS S3 HuggingFace).
 

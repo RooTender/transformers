@@ -14,13 +14,13 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Processors
+# Procesory
 
-Procesory mogą oznaczać dwie różne rzeczy w bibliotece Transformers:
+Procesory (ang. *processors*) mogą oznaczać dwie różne rzeczy w bibliotece Transformers:
 - obiekty, które wstępnie przetwarzają dane wejściowe dla modeli multimodalnych, takich jak [Wav2Vec2](../model_doc/wav2vec2) (mowa i tekst) lub [CLIP](../model_doc/clip) (tekst i wizja).
 - wycofane obiekty, które były używane w starszych wersjach biblioteki do wstępnego przetwarzania danych dla GLUE lub SQUAD.
 
-## Multi-modal processors
+## Procesory multimodalne
 
 Każdy model multimodalny będzie wymagał obiektu do kodowania lub dekodowania danych, które grupują kilka modalności (między tekstem, wizją i dźwiękiem). Jest to obsługiwane przez obiekty zwane procesorami, które grupują dwa lub więcej obiektów przetwarzania, takich jak tokenizatory (dla modalności tekstowej), procesory obrazu (dla wizji) i ekstraktory cech (dla dźwięku).
 
@@ -28,7 +28,7 @@ Procesory te dziedziczą z następującej klasy bazowej, która implementuje fun
 
 [[autodoc]] ProcessorMixin
 
-## Deprecated processors
+## Wycofane procesory
 
 Wszystkie procesory są zgodne z tą samą architekturą, którą jest  [`~data.processors.utils.DataProcessor`]. Zwraca ona listę [`~data.processors.utils.InputExample`]. Te [`~data.processors.utils.InputExample`] mogą zostać przekonwertowane na [`~data.processors.utils.InputFeatures`] w celu wprowadzenia ich do modelu.
 
@@ -82,7 +82,7 @@ Przykład użycia tych procesorów podano w skrypcie [run_xnli.py](https://githu
 
 Ta biblioteka zawiera procesor dla każdej z dwóch wersji:
 
-### Processors
+### Procesory
 
 Te procesory to:
 
@@ -102,7 +102,7 @@ Dodatkowo, poniższa metoda może być użyta do konwersji przykładów SQuAD na
 Procesory te, jak również wspomniana wcześniej metoda, mogą być używane z plikami zawierającymi dane, jak również z paczką *tensorflow_datasets*. Przykłady podano poniżej.
 
 
-### Example usage
+### Przykład użycia
 
 Poniżej znajduje się przykład wykorzystujący procesory, a także metodę konwersji przy użyciu plików danych:
 

@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Keras callbacks
+# Wywołania zwrotne w Kerasie
 
 Podczas treningu modelu Transformers za pomocą Keras, dostępnych jest kilka specyficznych dla biblioteki wywołań zwrotnych, które automatyzują typowe zadania:
 

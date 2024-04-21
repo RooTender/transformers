@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Quantization
+# Kwantyzacja
 
 Techniki kwantyzacji zmniejszają złożoność pamięciową i  obliczeniową, reprezentując wagi i aktywacje za pomocą typów danych o niższej precyzji, takich jak 8-bitowe liczby całkowite (int8). Umożliwia to ładowanie większych modeli, które normalnie nie byłyby w stanie zmieścić się w pamięci, i przyspiesza wnioskowanie. Transformers obsługuje algorytmy kwantyzacji AWQ i GPTQ oraz 8-bitową i 4-bitową kwantyzację za pomocą bitsandbytes.
 

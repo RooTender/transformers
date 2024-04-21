@@ -14,13 +14,13 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Exporting 🤗 Transformers models to ONNX
+# Eksportowanie modeli 🤗 Transformers do ONNX
 
 Transformers udostępnia pakiet `transformers.onnx`, który umożliwia konwersję punktów kontrolnych modelu na wykres ONNX poprzez wykorzystanie obiektów konfiguracyjnych.
 
 Więcej szczegółów można znaleźć w [przewodniku](../serialization) na temat eksportowania modeli 🤗 Transformers.
 
-## ONNX Configurations
+## Konfiguracje ONNX
 
 Zapewniamy trzy klasy abstrakcyjne, z których należy dziedziczyć, w zależności od typu architektury modelu, który chcesz wyeksportować:
 

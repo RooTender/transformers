@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Optimization
+# Optymalizacja
 
 Moduł `.optimization` zapewnia:
 
@@ -36,7 +36,7 @@ Moduł `.optimization` zapewnia:
 
 [[autodoc]] create_optimizer
 
-## Schedules
+## Schedulery
 
 ### Learning Rate Schedules (Pytorch)
 
@@ -70,7 +70,7 @@ Moduł `.optimization` zapewnia:
 
 [[autodoc]] WarmUp
 
-## Gradient Strategies
+## Strategie gradientowe
 
 ### GradientAccumulator (TensorFlow)
 

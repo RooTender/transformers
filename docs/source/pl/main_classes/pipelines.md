@@ -14,20 +14,20 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Pipelines
+# Potoki
 
-Potoki to świetny i łatwy sposób na wykorzystanie modeli do wnioskowania. Są to obiekty, które abstrahują większość złożonego kodu z biblioteki, oferując prosty interfejs API dedykowany kilku zadaniom, w tym rozpoznawaniu nazwanych przedmiotów (ang. *Named Entity Recognition*), przewidywaniu zamaskowanych słów (ang. *Masked Language Modeling*), analizie nastrojów (ang. *Sentiment Analysis*), ekstrakcji cech i odpowiadaniu na pytania. Przykłady użycia można znaleźć w rozdziale dot. [streszczania](../task_summary).
+Potoki (ang. *pipeline*) to świetny i łatwy sposób na wykorzystanie modeli do wnioskowania. Są to obiekty, które abstrahują większość złożonego kodu z biblioteki, oferując prosty interfejs API dedykowany kilku zadaniom, w tym rozpoznawaniu nazwanych przedmiotów (ang. *Named Entity Recognition*), przewidywaniu zamaskowanych słów (ang. *Masked Language Modeling*), analizie nastrojów (ang. *Sentiment Analysis*), ekstrakcji cech i odpowiadaniu na pytania. Przykłady użycia można znaleźć w rozdziale dot. [streszczania](../task_summary).
 
 Istnieją dwie kategorie abstrakcji potoków, o których należy pamiętać:
 
 - Potok [`pipeline`], który jest najpotężniejszym obiektem hermetyzującym wszystkie inne potoki.
 - Potoki specyficzne dla zadań są dostępne dla zadań [audio](#audio), [wizji komputerowej](#computer-vision), [przetwarzania języka naturalnego](#natural-language-processing) i [multimodalności](#multimodal).
 
-## The pipeline abstraction
+## Abstrakcje potoków
 
-Abstrakcja *pipeline* jest wrapperem dla innych dostępnych potoków. Jest on instancjonowany jak każdy inny, ale może to nieco ułatwić życie.
+Uabstrakcyjnienie potoku jest wrapperem dla innych dostępnych potoków. Jest on instancjonowany jak każdy inny, ale może to nieco ułatwić życie.
 
-Proste wywołanie jednego działania:
+Proste wywołanie jednego uruchomienia:
 
 ```python
 >>> pipe = pipeline("text-classification")

@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Agents & Tools
+# Agenci i narzędzia
 
 <Tip warning={true}>
 
@@ -24,7 +24,7 @@ Transformers Agents to eksperymentalny interfejs API, który może ulec zmianie 
 
 Aby dowiedzieć się więcej o agentach i narzędziach, przeczytaj [przewodnik wprowadzający](../transformers_agents). Ta strona zawiera dokumentację API dla klas bazowych.
 
-## Agents
+## Agenci
 
 Oferujemy trzy typy agentów: [`HfAgent`] wykorzystuje endpointy wnioskowania dla modeli opensource, [`LocalAgent`] wykorzystuje lokalnie zainstalowany model, a [`OpenAiAgent`] wykorzystuje modele zamknięte od OpenAI.
 
@@ -51,7 +51,7 @@ Oferujemy trzy typy agentów: [`HfAgent`] wykorzystuje endpointy wnioskowania dl
     - run
     - prepare_for_new_chat
 
-## Tools
+## Narzędzia
 
 ### load_tool
 
@@ -73,7 +73,7 @@ Oferujemy trzy typy agentów: [`HfAgent`] wykorzystuje endpointy wnioskowania dl
 
 [[autodoc]] launch_gradio_demo
 
-## Agent Types
+## Typy agentów
 
 Agenci mogą obsługiwać dowolny typ obiektu pomiędzy narzędziami; narzędzia, będąc całkowicie multimodalne, mogą przyjmować i zwracać tekst, obraz, dźwięk, wideo i inne typy. Aby zwiększyć kompatybilność między narzędziami, a także poprawnie renderować te wyniki w ipythonie (jupyter, colab, ipython notebooks, ...), implementujemy wrappery wokół tych typów.
 

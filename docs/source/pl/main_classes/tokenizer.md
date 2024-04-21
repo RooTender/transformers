@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Tokenizer
+# Tokenizery
 
 Tokenizer jest odpowiedzialny za przygotowanie danych wejściowych dla modelu. Biblioteka zawiera tokenizery dla wszystkich modeli. Większość tokenizerów jest dostępna w dwóch wersjach: pełnej implementacji w Pythonie i "Fast" (pl. *szybkiej*) implementacji opartej na bibliotece Rust [🤗 Tokenizers](https://github.com/huggingface/tokenizers). "Fast" implementacje pozwalają na:
 

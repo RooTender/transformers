@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Model outputs
+# Wyjście modelu
 
 Wszystkie modele mają wyjścia, które są instancjami podklas [`~utils.ModelOutput`]. Są to struktury danych zawierające wszystkie informacje zwracane przez model, ale mogą być również używane jako krotki lub słowniki.
 

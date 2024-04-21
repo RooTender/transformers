@@ -14,7 +14,7 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Data Collator
+# Kolator danych
 
 Kolatory danych to obiekty, które tworzą wsad (ang. *batch*) przy użyciu listy elementów zbioru danych jako danych wejściowych. Elementy te są tego samego typu co elementy `train_dataset` lub `eval_dataset`.
 

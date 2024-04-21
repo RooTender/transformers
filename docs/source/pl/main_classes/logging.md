@@ -16,7 +16,7 @@ rendered properly in your Markdown viewer.
 
 # Logging
 
-🤗 Transformers ma scentralizowany system logowania, dzięki czemu można łatwo skonfigurować ilość detali w logach (ang. verbosity) biblioteki.
+🤗 Transformers ma scentralizowany system notowania zdarzeń, dzięki czemu można łatwo skonfigurować ilość detali w logach (ang. verbosity) biblioteki.
 
 Obecnie domyślną wartością ilości szczegółów logów biblioteki jest `WARNING`.
 
@@ -34,7 +34,7 @@ Można również użyć zmiennej środowiskowej `TRANSFORMERS_VERBOSITY`, aby za
 TRANSFORMERS_VERBOSITY=error ./myprogram.py
 ```
 
-Dodatkowo, niektóre `ostrzeżenia` mogą być wyłączone poprzez ustawienie zmiennej środowiskowej `TRANSFORMERS_NO_ADVISORY_WARNINGS` na wartość true, jak *1*. Spowoduje to wyłączenie każdego ostrzeżenia, które jest logowane przy użyciu [`logger.warning_advice`]. Na przykład:
+Dodatkowo, niektóre `ostrzeżenia` mogą być wyłączone poprzez ustawienie zmiennej środowiskowej `TRANSFORMERS_NO_ADVISORY_WARNINGS` na wartość true, jak *1*. Spowoduje to wyłączenie każdego ostrzeżenia, które jest rejestrowane przy użyciu [`logger.warning_advice`]. Na przykład:
 
 ```bash
 TRANSFORMERS_NO_ADVISORY_WARNINGS=1 ./myprogram.py
@@ -52,7 +52,7 @@ logger.warning("WARN")
 ```
 
 
-Wszystkie metody tego modułu logowania są udokumentowane poniżej. Główne z nich to [`logging.get_verbosity`], aby uzyskać aktualny poziom szczegółowości logów i [`logging.set_verbosity`], aby ją ustawić. W kolejności (od najmniejszej szczegółowości do największej), te poziomy (z odpowiadającymi im wartościami int w nawiasach) to:
+Wszystkie metody tego modułu są udokumentowane poniżej. Główne z nich to [`logging.get_verbosity`], aby uzyskać aktualny poziom szczegółowości logów i [`logging.set_verbosity`], aby ją ustawić. W kolejności (od najmniejszej szczegółowości do największej), te poziomy (z odpowiadającymi im wartościami int w nawiasach) to:
 
 - `transformers.logging.CRITICAL` lub `transformers.logging.FATAL` (wartość int, 50): raportuje tylko błędy krytyczne.
 - `transformers.logging.ERROR` (wartość int, 40): zgłasza tylko błędy.
@@ -64,7 +64,7 @@ Domyślnie, paski postępu `tqdm` będą wyświetlane podczas pobierania modelu.
 
 ## `logging` vs `warnings`
 
-Python posiada dwa systemy logowania, które są często używane w połączeniu: `logging`, który został wyjaśniony powyżej, oraz `warnings`, który pozwala na dalszą klasyfikację ostrzeżeń w określonych zbiorach. Np. `FutureWarning` jest dla funkcji lub ścieżki, która została już wycofana, natomiast `DeprecationWarning` informuje, że jest planowane wycofanie jakiejś funkcjonalności.
+Python posiada dwa systemy rejestracji zdarzeń, które są często używane w połączeniu: `logging`, który został wyjaśniony powyżej, oraz `warnings`, który pozwala na dalszą klasyfikację ostrzeżeń w określonych zbiorach. Np. `FutureWarning` jest dla funkcji lub ścieżki, która została już wycofana, natomiast `DeprecationWarning` informuje, że jest planowane wycofanie jakiejś funkcjonalności.
 
 Używamy obu w bibliotece `transformers`. Wykorzystujemy i dostosowujemy metodę `captureWarning` biblioteki `logging`, aby umożliwić zarządzanie tymi komunikatami ostrzegawczymi za pomocą powyższych setterów szczegółowości logów.
 
@@ -76,7 +76,7 @@ Zobacz opis metody `captureWarnings` poniżej.
 
 [[autodoc]] logging.captureWarnings
 
-## Base setters
+## Główne settery
 
 [[autodoc]] logging.set_verbosity_error
 
@@ -86,7 +86,7 @@ Zobacz opis metody `captureWarnings` poniżej.
 
 [[autodoc]] logging.set_verbosity_debug
 
-## Other functions
+## Inne funkcje
 
 [[autodoc]] logging.get_verbosity
 
