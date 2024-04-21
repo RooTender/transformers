@@ -16,11 +16,11 @@ rendered properly in your Markdown viewer.
 
 # Optimization
 
-The `.optimization` module provides:
+Moduł `.optimization` zapewnia:
 
-- an optimizer with weight decay fixed that can be used to fine-tuned models, and
-- several schedules in the form of schedule objects that inherit from `_LRSchedule`:
-- a gradient accumulation class to accumulate the gradients of multiple batches
+- optymalizator ze stałym rozkładem wag (ang. *weight decay*), który może być używany do dostrajania modeli,
+- kilka harmonogramów w postaci obiektów planistów (schedulerów), które dziedziczą po `_LRSchedule`,
+- klasa akumulacji gradientu do akumulacji gradientów używających wsadów (ang. *batches*)
 
 ## AdamW (PyTorch)
 

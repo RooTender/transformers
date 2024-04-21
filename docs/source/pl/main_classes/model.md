@@ -16,22 +16,14 @@ rendered properly in your Markdown viewer.
 
 # Models
 
-The base classes [`PreTrainedModel`], [`TFPreTrainedModel`], and
-[`FlaxPreTrainedModel`] implement the common methods for loading/saving a model either from a local
-file or directory, or from a pretrained model configuration provided by the library (downloaded from HuggingFace's AWS
-S3 repository).
+Klasy bazowe [`PreTrainedModel`], [`TFPreTrainedModel`] i [`FlaxPreTrainedModel`] implementują wspólne metody wczytywania/zapisu modelu albo z lokalnego pliku lub katalogu, albo z konfiguracji wstępnie wytrenowanego modelu dostarczonej przez bibliotekę (pobranej z repozytorium AWS S3 HuggingFace).
 
-[`PreTrainedModel`] and [`TFPreTrainedModel`] also implement a few methods which
-are common among all the models to:
+[`PreTrainedModel`] i [`TFPreTrainedModel`] również implementują kilka metod, które są wspólne dla wszystkich modeli:
 
-- resize the input token embeddings when new tokens are added to the vocabulary
-- prune the attention heads of the model.
+- zmiana rozmiaru osadzeń tokenów (ang. *token embedding*) wejściowych, gdy nowe tokeny są dodawane do słownika
+- przycinanie głowic uwagi (ang. *attention heads*) modelu.
 
-The other methods that are common to each model are defined in [`~modeling_utils.ModuleUtilsMixin`]
-(for the PyTorch models) and [`~modeling_tf_utils.TFModuleUtilsMixin`] (for the TensorFlow models) or
-for text generation, [`~generation.GenerationMixin`] (for the PyTorch models),
-[`~generation.TFGenerationMixin`] (for the TensorFlow models) and
-[`~generation.FlaxGenerationMixin`] (for the Flax/JAX models).
+Pozostałe metody, które są wspólne dla każdego modelu są zdefiniowane w [`~modeling_utils.ModuleUtilsMixin`] (dla modeli PyTorch) i [`~modeling_tf_utils.TFModuleUtilsMixin`] (dla modeli TensorFlow) lub dla generowania tekstu, [`~generation. GenerationMixin`] (dla modeli PyTorch), [`~generation.TFGenerationMixin`] (dla modeli TensorFlow) i [`~generation.FlaxGenerationMixin`] (dla modeli Flax/JAX).
 
 
 ## PreTrainedModel

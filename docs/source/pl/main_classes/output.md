@@ -16,11 +16,9 @@ rendered properly in your Markdown viewer.
 
 # Model outputs
 
-All models have outputs that are instances of subclasses of [`~utils.ModelOutput`]. Those are
-data structures containing all the information returned by the model, but that can also be used as tuples or
-dictionaries.
+Wszystkie modele mają wyjścia, które są instancjami podklas [`~utils.ModelOutput`]. Są to struktury danych zawierające wszystkie informacje zwracane przez model, ale mogą być również używane jako krotki lub słowniki.
 
-Let's see how this looks in an example:
+Zobaczmy, jak to wygląda na przykładzie:
 
 ```python
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -34,38 +32,29 @@ labels = torch.tensor([1]).unsqueeze(0)  # Batch size 1
 outputs = model(**inputs, labels=labels)
 ```
 
-The `outputs` object is a [`~modeling_outputs.SequenceClassifierOutput`], as we can see in the
-documentation of that class below, it means it has an optional `loss`, a `logits`, an optional `hidden_states` and
-an optional `attentions` attribute. Here we have the `loss` since we passed along `labels`, but we don't have
-`hidden_states` and `attentions` because we didn't pass `output_hidden_states=True` or
-`output_attentions=True`.
+Obiekt `outputs` jest typu [`~modeling_outputs.SequenceClassifierOutput`], jak możemy zobaczyć w dokumentacji tej klasy poniżej. Oznacza to, że posiada on opcjonalny atrybut `loss`, `logits`, opcjonalny `hidden_states` oraz opcjonalny atrybut `attentions`. Tutaj mamy `loss`, ponieważ przekazaliśmy `labels`. Nie mamy natomiast `hidden_states` i `attentions`, ponieważ nie ustawiliśmy parametrów `output_hidden_states=True` czy `output_attentions=True`.
 
 <Tip>
 
-When passing `output_hidden_states=True` you may expect the `outputs.hidden_states[-1]` to match `outputs.last_hidden_states` exactly.
-However, this is not always the case. Some models apply normalization or subsequent process to the last hidden state when it's returned.
+Przekazując `output_hidden_states=True` można oczekiwać, że `outputs.hidden_states[-1]` będzie dokładnie odpowiadać `outputs.last_hidden_states`.
+Jednak nie zawsze tak jest. Niektóre modele stosują normalizację lub kolejny proces do ostatniego ukrytego stanu, gdy jest on zwracany.
 
 </Tip>
 
 
-You can access each attribute as you would usually do, and if that attribute has not been returned by the model, you
-will get `None`. Here for instance `outputs.loss` is the loss computed by the model, and `outputs.attentions` is
-`None`.
+Możesz uzyskać dostęp do każdego atrybutu tak, jak zwykle, a jeśli ten atrybut nie został zwrócony przez model, otrzymasz `None`. Na przykład `outputs.loss` to wartość funkcji straty obliczonej przez model, a `outputs.attentions` to `None`.
 
-When considering our `outputs` object as tuple, it only considers the attributes that don't have `None` values.
-Here for instance, it has two elements, `loss` then `logits`, so
+Traktując nasz obiekt `outputs` jako krotkę, bierze on pod uwagę tylko te atrybuty, które nie mają wartości `None`. Tutaj na przykład ma dwa elementy, `loss` i `logits`, więc
 
 ```python
 outputs[:2]
 ```
 
-will return the tuple `(outputs.loss, outputs.logits)` for instance.
+zwróci na przykład krotkę `(outputs.loss, outputs.logits)`.
 
-When considering our `outputs` object as dictionary, it only considers the attributes that don't have `None`
-values. Here for instance, it has two keys that are `loss` and `logits`.
+Traktując nasz obiekt `outputs` jako słownik, bierze on pod uwagę tylko te atrybuty, które nie mają wartości `None`. Tutaj na przykład ma dwa klucze, którymi są `loss` i `logits`.
 
-We document here the generic model outputs that are used by more than one model type. Specific output types are
-documented on their corresponding model page.
+Dokumentujemy tutaj ogólne dane wyjściowe modeli, które są używane przez więcej niż jeden typ modelu. Dokładne typy danych wyjściowych są udokumentowane na stronie dotyczącej konkretnego modelu.
 
 ## ModelOutput
 
