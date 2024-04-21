@@ -16,19 +16,17 @@ rendered properly in your Markdown viewer.
 
 # Trainer
 
-The [`Trainer`] class provides an API for feature-complete training in PyTorch, and it supports distributed training on multiple GPUs/TPUs, mixed precision for [NVIDIA GPUs](https://nvidia.github.io/apex/), [AMD GPUs](https://rocm.docs.amd.com/en/latest/rocm.html), and [`torch.amp`](https://pytorch.org/docs/stable/amp.html) for PyTorch. [`Trainer`] goes hand-in-hand with the [`TrainingArguments`] class, which offers a wide range of options to customize how a model is trained. Together, these two classes provide a complete training API.
+Klasa [`Trainer`] oferuje kompleksowe API do trenowania modeli w PyTorch, wspierając jednocześnie trening rozproszony na wielu GPU/TPU, mieszaną precyzję dla [NVIDIA GPUs](https://nvidia.github.io/apex/), [AMD GPUs](https://rocm.docs.amd.com/en/latest/rocm.html) i [`torch.amp`](https://pytorch.org/docs/stable/amp.html) dla PyTorch. Klasa [`Trainer`] działa w parze z klasą [`TrainingArguments`], która oferuje szeroki zakres opcji dostosowywania sposobu trenowania modelu. Razem te dwie klasy zapewniają kompletne API trenowania.
 
-[`Seq2SeqTrainer`] and [`Seq2SeqTrainingArguments`] inherit from the [`Trainer`] and [`TrainingArgument`] classes and they're adapted for training models for sequence-to-sequence tasks such as summarization or translation.
+[`Seq2SeqTrainer`] i [`Seq2SeqTrainingArguments`] dziedziczą funkcjonalności z klas [`Trainer`] i [`TrainingArgument`] oraz są przystosowane do trenowania modeli dla zadań sekwencja-do-sekwencji (ang. *sequence-to-sequence*), takich jak streszczanie czy tłumaczenie.
 
 <Tip warning={true}>
 
-The [`Trainer`] class is optimized for 🤗 Transformers models and can have surprising behaviors
-when used with other models. When using it with your own model, make sure:
+Klasa [`Trainer`] jest zoptymalizowana dla modeli 🤗 Transformers i może mieć niespodziewane zachowania gdy jest używana z innymi modelami. Używając jej z własnym modelem, należy się upewnić:
 
-- your model always return tuples or subclasses of [`~utils.ModelOutput`]
-- your model can compute the loss if a `labels` argument is provided and that loss is returned as the first
-  element of the tuple (if your model returns tuples)
-- your model can accept multiple label arguments (use `label_names` in [`TrainingArguments`] to indicate their name to the [`Trainer`]) but none of them should be named `"label"`
+- Twój model zawsze zwraca krotki lub podklasy [`~utils.ModelOutput`]
+- Twój model może obliczyć funkcję strat, jeśli podany zostanie argument `labels` i strata ta zostanie zwrócona jako pierwszy element krotki (jeśli model zwraca krotki).
+- Twój model może przyjąć wiele argumentów w formie etykiet (użyj `label_names` w [`TrainingArguments`], aby określić ich nazwę dla instancji [`Trainer`]), ale żaden z nich nie powinien być nazwany `"label"`.
 
 </Tip>
 
