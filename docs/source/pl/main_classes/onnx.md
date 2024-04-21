@@ -14,22 +14,19 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Exporting 🤗 Transformers models to ONNX
+# Eksportowanie modeli 🤗 Transformers do ONNX
 
-🤗 Transformers provides a `transformers.onnx` package that enables you to
-convert model checkpoints to an ONNX graph by leveraging configuration objects.
+Transformers udostępnia pakiet `transformers.onnx`, który umożliwia konwersję punktów kontrolnych modelu na wykres ONNX poprzez wykorzystanie obiektów konfiguracyjnych.
 
-See the [guide](../serialization) on exporting 🤗 Transformers models for more
-details.
+Więcej szczegółów można znaleźć w [przewodniku](../serialization) na temat eksportowania modeli 🤗 Transformers.
 
-## ONNX Configurations
+## Konfiguracje ONNX
 
-We provide three abstract classes that you should inherit from, depending on the
-type of model architecture you wish to export:
+Zapewniamy trzy klasy abstrakcyjne, z których należy dziedziczyć, w zależności od typu architektury modelu, który chcesz wyeksportować:
 
-* Encoder-based models inherit from [`~onnx.config.OnnxConfig`]
-* Decoder-based models inherit from [`~onnx.config.OnnxConfigWithPast`]
-* Encoder-decoder models inherit from [`~onnx.config.OnnxSeq2SeqConfigWithPast`]
+* Modele oparte na koderze dziedziczą po [`~onnx.config.OnnxConfig`]
+* Modele oparte na dekoderach dziedziczą po [`~onnx.config.OnnxConfigWithPast`]
+* Modele kodera-dekodera dziedziczą z [`~onnx.config.OnnxSeq2SeqConfigWithPast`].
 
 ### OnnxConfig
 
@@ -45,8 +42,7 @@ type of model architecture you wish to export:
 
 ## ONNX Features
 
-Each ONNX configuration is associated with a set of _features_ that enable you
-to export models for different types of topologies or tasks.
+Każda konfiguracja ONNX jest powiązana z zestawem _funkcji_, które umożliwiają eksportowanie modeli dla różnych typów topologii lub zadań.
 
 ### FeaturesManager
 

@@ -16,12 +16,11 @@ rendered properly in your Markdown viewer.
 
 # Logging
 
-🤗 Transformers has a centralized logging system, so that you can setup the verbosity of the library easily.
+🤗 Transformers ma scentralizowany system notowania zdarzeń, dzięki czemu można łatwo skonfigurować ilość detali w logach (ang. verbosity) biblioteki.
 
-Currently the default verbosity of the library is `WARNING`.
+Obecnie domyślną wartością ilości szczegółów logów biblioteki jest `WARNING`.
 
-To change the level of verbosity, just use one of the direct setters. For instance, here is how to change the verbosity
-to the INFO level.
+Aby zmienić poziom szczegółowości, wystarczy użyć jednego z bezpośrednich setterów. Na przykład, oto jak zmienić poziom ilości detali na poziom INFO.
 
 ```python
 import transformers
@@ -29,22 +28,19 @@ import transformers
 transformers.logging.set_verbosity_info()
 ```
 
-You can also use the environment variable `TRANSFORMERS_VERBOSITY` to override the default verbosity. You can set it
-to one of the following: `debug`, `info`, `warning`, `error`, `critical`. For example:
+Można również użyć zmiennej środowiskowej `TRANSFORMERS_VERBOSITY`, aby zastąpić domyślną szczegółowość logów. Można ją ustawić na jedną z następujących wartości: `debug`, `info`, `warning`, `error`, `critical`. Na przykład:
 
 ```bash
 TRANSFORMERS_VERBOSITY=error ./myprogram.py
 ```
 
-Additionally, some `warnings` can be disabled by setting the environment variable
-`TRANSFORMERS_NO_ADVISORY_WARNINGS` to a true value, like *1*. This will disable any warning that is logged using
-[`logger.warning_advice`]. For example:
+Dodatkowo, niektóre `ostrzeżenia` mogą być wyłączone poprzez ustawienie zmiennej środowiskowej `TRANSFORMERS_NO_ADVISORY_WARNINGS` na wartość true, jak *1*. Spowoduje to wyłączenie każdego ostrzeżenia, które jest rejestrowane przy użyciu [`logger.warning_advice`]. Na przykład:
 
 ```bash
 TRANSFORMERS_NO_ADVISORY_WARNINGS=1 ./myprogram.py
 ```
 
-Here is an example of how to use the same logger as the library in your own module or script:
+Poniżej znajduje się przykład użycia tego samego loggera i to jak możesz go użyć w module lub skrypcie:
 
 ```python
 from transformers.utils import logging
@@ -56,39 +52,31 @@ logger.warning("WARN")
 ```
 
 
-All the methods of this logging module are documented below, the main ones are
-[`logging.get_verbosity`] to get the current level of verbosity in the logger and
-[`logging.set_verbosity`] to set the verbosity to the level of your choice. In order (from the least
-verbose to the most verbose), those levels (with their corresponding int values in parenthesis) are:
+Wszystkie metody tego modułu są udokumentowane poniżej. Główne z nich to [`logging.get_verbosity`], aby uzyskać aktualny poziom szczegółowości logów i [`logging.set_verbosity`], aby ją ustawić. W kolejności (od najmniejszej szczegółowości do największej), te poziomy (z odpowiadającymi im wartościami int w nawiasach) to:
 
-- `transformers.logging.CRITICAL` or `transformers.logging.FATAL` (int value, 50): only report the most
-  critical errors.
-- `transformers.logging.ERROR` (int value, 40): only report errors.
-- `transformers.logging.WARNING` or `transformers.logging.WARN` (int value, 30): only reports error and
-  warnings. This the default level used by the library.
-- `transformers.logging.INFO` (int value, 20): reports error, warnings and basic information.
-- `transformers.logging.DEBUG` (int value, 10): report all information.
+- `transformers.logging.CRITICAL` lub `transformers.logging.FATAL` (wartość int, 50): raportuje tylko błędy krytyczne.
+- `transformers.logging.ERROR` (wartość int, 40): zgłasza tylko błędy.
+- `transformers.logging.WARNING` lub `transformers.logging.WARN` (wartość int, 30): zgłasza tylko błędy i ostrzeżenia. Jest to domyślny poziom używany przez bibliotekę.
+- `transformers.logging.INFO` (wartość int, 20): raportuje błędy, ostrzeżenia i podstawowe informacje.
+- `transformers.logging.DEBUG` (wartość int, 10): raportuje wszystkie informacje.
 
-By default, `tqdm` progress bars will be displayed during model download. [`logging.disable_progress_bar`] and [`logging.enable_progress_bar`] can be used to suppress or unsuppress this behavior.
+Domyślnie, paski postępu `tqdm` będą wyświetlane podczas pobierania modelu. [`logging.disable_progress_bar`] i [`logging.enable_progress_bar`] mogą być użyte do wyłączenia lub wyłączenia tego zachowania.
 
 ## `logging` vs `warnings`
 
-Python has two logging systems that are often used in conjunction: `logging`, which is explained above, and `warnings`,
-which allows further classification of warnings in specific buckets, e.g., `FutureWarning` for a feature or path
-that has already been deprecated and `DeprecationWarning` to indicate an upcoming deprecation.
+Python posiada dwa systemy rejestracji zdarzeń, które są często używane w połączeniu: `logging`, który został wyjaśniony powyżej, oraz `warnings`, który pozwala na dalszą klasyfikację ostrzeżeń w określonych zbiorach. Np. `FutureWarning` jest dla funkcji lub ścieżki, która została już wycofana, natomiast `DeprecationWarning` informuje, że jest planowane wycofanie jakiejś funkcjonalności.
 
-We use both in the `transformers` library. We leverage and adapt `logging`'s `captureWarning` method to allow
-management of these warning messages by the verbosity setters above.
+Używamy obu w bibliotece `transformers`. Wykorzystujemy i dostosowujemy metodę `captureWarning` biblioteki `logging`, aby umożliwić zarządzanie tymi komunikatami ostrzegawczymi za pomocą powyższych setterów szczegółowości logów.
 
-What does that mean for developers of the library? We should respect the following heuristic:
-- `warnings` should be favored for developers of the library and libraries dependent on `transformers`
-- `logging` should be used for end-users of the library using it in every-day projects
+Co to oznacza dla twórców biblioteki? Powinniśmy przestrzegać następującej heurystyki:
+- `warnings` powinny być preferowane dla deweloperów tej biblioteki i bibliotek zależnych od `transformers`
+- `logging` powinno być używane dla użytkowników końcowych biblioteki, używających jej we własnych projektach
 
-See reference of the `captureWarnings` method below.
+Zobacz opis metody `captureWarnings` poniżej.
 
 [[autodoc]] logging.captureWarnings
 
-## Base setters
+## Główne settery
 
 [[autodoc]] logging.set_verbosity_error
 
@@ -98,7 +86,7 @@ See reference of the `captureWarnings` method below.
 
 [[autodoc]] logging.set_verbosity_debug
 
-## Other functions
+## Inne funkcje
 
 [[autodoc]] logging.get_verbosity
 

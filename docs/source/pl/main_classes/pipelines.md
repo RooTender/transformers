@@ -14,24 +14,20 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Pipelines
+# Potoki
 
-The pipelines are a great and easy way to use models for inference. These pipelines are objects that abstract most of
-the complex code from the library, offering a simple API dedicated to several tasks, including Named Entity
-Recognition, Masked Language Modeling, Sentiment Analysis, Feature Extraction and Question Answering. See the
-[task summary](../task_summary) for examples of use.
+Potoki (ang. *pipeline*) to świetny i łatwy sposób na wykorzystanie modeli do wnioskowania. Są to obiekty, które abstrahują większość złożonego kodu z biblioteki, oferując prosty interfejs API dedykowany kilku zadaniom, w tym rozpoznawaniu nazwanych przedmiotów (ang. *Named Entity Recognition*), przewidywaniu zamaskowanych słów (ang. *Masked Language Modeling*), analizie nastrojów (ang. *Sentiment Analysis*), ekstrakcji cech i odpowiadaniu na pytania. Przykłady użycia można znaleźć w rozdziale dot. [streszczania](../task_summary).
 
-There are two categories of pipeline abstractions to be aware about:
+Istnieją dwie kategorie abstrakcji potoków, o których należy pamiętać:
 
-- The [`pipeline`] which is the most powerful object encapsulating all other pipelines.
-- Task-specific pipelines are available for [audio](#audio), [computer vision](#computer-vision), [natural language processing](#natural-language-processing), and [multimodal](#multimodal) tasks.
+- Potok [`pipeline`], który jest najpotężniejszym obiektem hermetyzującym wszystkie inne potoki.
+- Potoki specyficzne dla zadań są dostępne dla zadań [audio](#audio), [wizji komputerowej](#computer-vision), [przetwarzania języka naturalnego](#natural-language-processing) i [multimodalności](#multimodal).
 
-## The pipeline abstraction
+## Abstrakcje potoków
 
-The *pipeline* abstraction is a wrapper around all the other available pipelines. It is instantiated as any other
-pipeline but can provide additional quality of life.
+Uabstrakcyjnienie potoku jest wrapperem dla innych dostępnych potoków. Jest on instancjonowany jak każdy inny, ale może to nieco ułatwić życie.
 
-Simple call on one item:
+Proste wywołanie jednego uruchomienia:
 
 ```python
 >>> pipe = pipeline("text-classification")
@@ -39,8 +35,7 @@ Simple call on one item:
 [{'label': 'POSITIVE', 'score': 0.9998743534088135}]
 ```
 
-If you want to use a specific model from the [hub](https://huggingface.co) you can ignore the task if the model on
-the hub already defines it:
+Jeśli chcesz użyć określonego modelu z [hubu](https://huggingface.co) to możesz zignorować określanie zadania, jeśli taki model posiada je domyślnie:
 
 ```python
 >>> pipe = pipeline(model="FacebookAI/roberta-large-mnli")
@@ -48,7 +43,7 @@ the hub already defines it:
 [{'label': 'NEUTRAL', 'score': 0.7313136458396912}]
 ```
 
-To call a pipeline on many items, you can call it with a *list*.
+Aby wywołać potok na wielu elementach, można wywołać go za pomocą *list*.
 
 ```python
 >>> pipe = pipeline("text-classification")
@@ -57,9 +52,7 @@ To call a pipeline on many items, you can call it with a *list*.
  {'label': 'NEGATIVE', 'score': 0.9996669292449951}]
 ```
 
-To iterate over full datasets it is recommended to use a `dataset` directly. This means you don't need to allocate
-the whole dataset at once, nor do you need to do batching yourself. This should work just as fast as custom loops on
-GPU. If it doesn't don't hesitate to create an issue.
+Aby iterować po pełnych zbiorach danych, zaleca się bezpośrednie użycie `dataset`. Oznacza to, że nie musisz alokować całego zbioru danych na raz, ani nie musisz samodzielnie wykonywać batchingu. Powinno to działać tak samo szybko jak niestandardowe cykle na GPU. Jeśli tak nie jest, nie wahaj się utworzyć zgłoszenia.
 
 ```python
 import datasets
@@ -79,7 +72,7 @@ for out in tqdm(pipe(KeyDataset(dataset, "file"))):
     # ....
 ```
 
-For ease of use, a generator is also possible:
+Dla ułatwienia obsługi możliwe jest również użycie generatora:
 
 
 ```python
@@ -109,8 +102,7 @@ for out in pipe(data()):
 
 ## Pipeline batching
 
-All pipelines can use batching. This will work
-whenever the pipeline uses its streaming ability (so when passing lists or `Dataset` or `generator`).
+Wszystkie potoki mogą używać batchingu. Będzie to działać za każdym razem, gdy potok użyje strumieniowania (a więc podczas przekazywania list lub `Dataset` lub `generator`).
 
 ```python
 from transformers import pipeline
@@ -128,10 +120,9 @@ for out in pipe(KeyDataset(dataset, "text"), batch_size=8, truncation="only_firs
 
 <Tip warning={true}>
 
-However, this is not automatically a win for performance. It can be either a 10x speedup or 5x slowdown depending
-on hardware, data and the actual model being used.
+Jednakże, nie oznacza to automatycznego wzrostu wydajności. Może to być 10-krotne przyspieszenie lub 5-krotne spowolnienie w zależności od sprzętu, danych i aktualnie używanego modelu.
 
-Example where it's mostly a speedup:
+Przykład, gdzie głównie następuje przyspieszenie:
 
 </Tip>
 
@@ -177,7 +168,7 @@ Streaming batch_size=256
 (diminishing returns, saturated the GPU)
 ```
 
-Example where it's most a slowdown:
+Przykład, gdzie głównie następuje spowolnienie:
 
 ```python
 class MyDataset(Dataset):
@@ -192,9 +183,7 @@ class MyDataset(Dataset):
         return "This is a test" * n
 ```
 
-This is a occasional very long sentence compared to the other. In that case, the **whole** batch will need to be 400
-tokens long, so the whole batch will be [64, 400] instead of [64, 4], leading to the high slowdown. Even worse, on
-bigger batches, the program simply crashes.
+Niekiedy następują bardzo długie zdania do analizy. W takim przypadku **cały** wsad będzie musiał mieć długość 400 tokenów, zatem wsad będzie miał wymiary [64, 400] zamiast [64, 4], co prowadzi do sporego spowolnienia. Co gorsza, przy większych wsadach program po prostu się zawiesza.
 
 
 ```
@@ -218,32 +207,25 @@ Traceback (most recent call last):
 RuntimeError: CUDA out of memory. Tried to allocate 376.00 MiB (GPU 0; 3.95 GiB total capacity; 1.72 GiB already allocated; 354.88 MiB free; 2.46 GiB reserved in total by PyTorch)
 ```
 
-There are no good (general) solutions for this problem, and your mileage may vary depending on your use cases. Rule of
-thumb:
+Nie ma dobrych (w ogólności) rozwiązań dla tego problemu, a przebieg może się różnić w zależności od przypadków użycia.
 
-For users, a rule of thumb is:
+Dla użytkowników główną zasadą jest:
 
-- **Measure performance on your load, with your hardware. Measure, measure, and keep measuring. Real numbers are the
-  only way to go.**
-- If you are latency constrained (live product doing inference), don't batch.
-- If you are using CPU, don't batch.
-- If you are using throughput (you want to run your model on a bunch of static data), on GPU, then:
+- **Mierz wydajność na swoim obciążeniu, na swoim sprzęcie. Mierz, mierz i nie przestawaj mierzyć. Tylko liczby powiedzą Ci prawdę.**
+- Jeśli masz opóźnienia (np. produkt wnioskowuje na żywo), nie stosuj wsadów.
+- Jeśli korzystasz z CPU, nie stosuj wsadów.
+- Jeśli używasz przepustowości (chcesz uruchomić swój model na wielu statycznych danych), na GPU, to:
 
-  - If you have no clue about the size of the sequence_length ("natural" data), by default don't batch, measure and
-    try tentatively to add it, add OOM checks to recover when it will fail (and it will at some point if you don't
-    control the sequence_length.)
-  - If your sequence_length is super regular, then batching is more likely to be VERY interesting, measure and push
-    it until you get OOMs.
-  - The larger the GPU the more likely batching is going to be more interesting
-- As soon as you enable batching, make sure you can handle OOMs nicely.
+  - Jeśli nie masz pojęcia o rozmiarze `sequence_length` ("naturalnych" danych), domyślnie nie stosuj wsadów. Mierz i eksperymentuj z coraz większym wsadem. Dodaj kontrole OOM (ang. *Out Of Memory*), aby odzyskać progres, gdy coś się nie powiedzie (i tak się stanie w pewnym momencie, jeśli nie kontrolujesz `sequence_length`).
+  - Jeśli twoja `sequence_length` jest super regularna, to użycie wsadów prawdopodobne będzie bardzo korzystne. Mierz i zwiększaj ich rozmiar, aż uzyskasz OOM.
+  - Im masz większe GPU, tym większe partie danych można przetwarzać. Warto eksperymentować z większymi wsadami.
+- Jak stosujesz batching to upewnij się, że dobrze obsługujesz OOM.
 
 ## Pipeline chunk batching
 
-`zero-shot-classification` and `question-answering` are slightly specific in the sense, that a single input might yield
-multiple forward pass of a model. Under normal circumstances, this would yield issues with `batch_size` argument.
+`zero-shot-classification` i `question-answering` są nieco specyficzne w tym sensie, że pojedyncze dane wejściowe mogą dawać wiele przejść modelu do przodu (ang. *forward pass*). W normalnych okolicznościach spowodowałoby to problemy z argumentem `batch_size`.
 
-In order to circumvent this issue, both of these pipelines are a bit specific, they are `ChunkPipeline` instead of
-regular `Pipeline`. In short:
+Aby obejść ten problem użyj `ChunkPipeline` zamiast zwykłego `Pipeline`. W skrócie:
 
 
 ```python
@@ -252,7 +234,7 @@ model_outputs = pipe.forward(preprocessed)
 outputs = pipe.postprocess(model_outputs)
 ```
 
-Now becomes:
+Teraz staje się:
 
 
 ```python
@@ -263,24 +245,20 @@ for preprocessed in pipe.preprocess(inputs):
 outputs = pipe.postprocess(all_model_outputs)
 ```
 
-This should be very transparent to your code because the pipelines are used in
-the same way.
+Powinno to być bardzo przejrzyste w czytaniu kodu, ponieważ potoki są używane w ten sam sposób.
 
-This is a simplified view, since the pipeline can handle automatically the batch to ! Meaning you don't have to care
-about how many forward passes you inputs are actually going to trigger, you can optimize the `batch_size`
-independently of the inputs. The caveats from the previous section still apply.
+Jest to uproszczony widok, ponieważ potok może automatycznie obsługiwać partię! Oznacza to, że nie musisz dbać o to, ile przejść do przodu faktycznie wyzwolą dane wejściowe i możesz zoptymalizować `batch_size` niezależnie od danych wejściowych. Zastrzeżenia z poprzedniej sekcji nadal mają zastosowanie.
 
 ## Pipeline custom code
 
-If you want to override a specific pipeline.
+Jeśli chcesz zastąpić konkretny potok.
 
-Don't hesitate to create an issue for your task at hand, the goal of the pipeline is to be easy to use and support most
-cases, so `transformers` could maybe support your use case.
+Nie wahaj się utworzyć zgłoszenia dla swojego zadania, celem potoków jest bycie łatwym w użyciu i wspieranie większości działań, więc `transformers` mogą wspierać również twój przypadek użycia.
 
 
-If you want to try simply you can:
+Jeśli chcesz spróbować, po prostu możesz:
 
-- Subclass your pipeline of choice
+- Stworzyć podklasę wybranego potoku
 
 ```python
 class MyPipeline(TextClassificationPipeline):
@@ -295,16 +273,16 @@ my_pipeline = MyPipeline(model=model, tokenizer=tokenizer, ...)
 my_pipeline = pipeline(model="xxxx", pipeline_class=MyPipeline)
 ```
 
-That should enable you to do all the custom code you want.
+Powinno to umożliwić dodanie własnego kodu.
 
 
 ## Implementing a pipeline
 
-[Implementing a new pipeline](../add_new_pipeline)
+[Implementacja nowego potoku](../add_new_pipeline)
 
 ## Audio
 
-Pipelines available for audio tasks include the following.
+Potoki dostępne dla zadań audio obejmują następujące elementy.
 
 ### AudioClassificationPipeline
 
@@ -333,7 +311,7 @@ Pipelines available for audio tasks include the following.
 
 ## Computer vision
 
-Pipelines available for computer vision tasks include the following.
+Potoki dostępne dla zadań wizji komputerowej obejmują następujące elementy.
 
 ### DepthEstimationPipeline
 [[autodoc]] DepthEstimationPipeline
@@ -384,7 +362,7 @@ Pipelines available for computer vision tasks include the following.
 
 ## Natural Language Processing
 
-Pipelines available for natural language processing tasks include the following.
+Potoki dostępne dla zadań przetwarzania języka naturalnego obejmują następujące elementy.
 
 ### ConversationalPipeline
 
@@ -455,7 +433,7 @@ Pipelines available for natural language processing tasks include the following.
 
 ## Multimodal
 
-Pipelines available for multimodal tasks include the following.
+Potoki dostępne dla zadań multimodalnych obejmują następujące elementy.
 
 ### DocumentQuestionAnsweringPipeline
 

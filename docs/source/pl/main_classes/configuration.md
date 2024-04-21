@@ -14,14 +14,11 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Configuration
+# Konfiguracja
 
-The base class [`PretrainedConfig`] implements the common methods for loading/saving a configuration
-either from a local file or directory, or from a pretrained model configuration provided by the library (downloaded
-from HuggingFace's AWS S3 repository).
+Klasa bazowa [`PretrainedConfig`] implementuje wspólne metody do wczytywania/zapisu konfiguracji z lokalnego pliku lub katalogu, lub z wstępnie wytrenowanej konfiguracji modelu dostarczonej przez bibliotekę (pobranej z repozytorium AWS S3 HuggingFace).
 
-Each derived config class implements model specific attributes. Common attributes present in all config classes are:
-`hidden_size`, `num_attention_heads`, and `num_hidden_layers`. Text models further implement:
+Każda pochodna klasa config implementuje atrybuty specyficzne dla modelu. Wspólnymi atrybutami obecnymi we wszystkich klasach config są: `hidden_size`, `num_attention_heads` i `num_hidden_layers`. Modele tekstowe dodatkowo implementują:
 `vocab_size`.
 
 

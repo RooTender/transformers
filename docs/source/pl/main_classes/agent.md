@@ -14,21 +14,19 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Agents & Tools
+# Agenci i narzędzia
 
 <Tip warning={true}>
 
-Transformers Agents is an experimental API which is subject to change at any time. Results returned by the agents
-can vary as the APIs or underlying models are prone to change.
+Transformers Agents to eksperymentalny interfejs API, który może ulec zmianie w dowolnym momencie. Wyniki zwracane przez agentów mogą się różnić, ponieważ API lub modele bazowe są podatne na zmiany.
 
 </Tip>
 
-To learn more about agents and tools make sure to read the [introductory guide](../transformers_agents). This page
-contains the API docs for the underlying classes.
+Aby dowiedzieć się więcej o agentach i narzędziach, przeczytaj [przewodnik wprowadzający](../transformers_agents). Ta strona zawiera dokumentację API dla klas bazowych.
 
-## Agents
+## Agenci
 
-We provide three types of agents: [`HfAgent`] uses inference endpoints for opensource models, [`LocalAgent`] uses a model of your choice locally and [`OpenAiAgent`] uses OpenAI closed models.
+Oferujemy trzy typy agentów: [`HfAgent`] wykorzystuje endpointy wnioskowania dla modeli opensource, [`LocalAgent`] wykorzystuje lokalnie zainstalowany model, a [`OpenAiAgent`] wykorzystuje modele zamknięte od OpenAI.
 
 ### HfAgent
 
@@ -53,7 +51,7 @@ We provide three types of agents: [`HfAgent`] uses inference endpoints for opens
     - run
     - prepare_for_new_chat
 
-## Tools
+## Narzędzia
 
 ### load_tool
 
@@ -75,22 +73,17 @@ We provide three types of agents: [`HfAgent`] uses inference endpoints for opens
 
 [[autodoc]] launch_gradio_demo
 
-## Agent Types
+## Typy agentów
 
-Agents can handle any type of object in-between tools; tools, being completely multimodal, can accept and return
-text, image, audio, video, among other types. In order to increase compatibility between tools, as well as to 
-correctly render these returns in ipython (jupyter, colab, ipython notebooks, ...), we implement wrapper classes
-around these types.
+Agenci mogą obsługiwać dowolny typ obiektu pomiędzy narzędziami; narzędzia, będąc całkowicie multimodalne, mogą przyjmować i zwracać tekst, obraz, dźwięk, wideo i inne typy. Aby zwiększyć kompatybilność między narzędziami, a także poprawnie renderować te wyniki w ipythonie (jupyter, colab, ipython notebooks, ...), implementujemy wrappery wokół tych typów.
 
-The wrapped objects should continue behaving as initially; a text object should still behave as a string, an image
-object should still behave as a `PIL.Image`.
+Obiekty, na które nałożono wrapper, powinny nadal zachowywać się jak na początku; obiekt tekstowy powinien nadal zachowywać się jak ciąg znaków, obiekt obrazu powinien nadal zachowywać się jak `PIL.Image`.
 
-These types have three specific purposes:
+Typy te mają trzy konkretne cele:
 
-- Calling `to_raw` on the type should return the underlying object
-- Calling `to_string` on the type should return the object as a string: that can be the string in case of an `AgentText`
-  but will be the path of the serialized version of the object in other instances
-- Displaying it in an ipython kernel should display the object correctly
+- Wywołanie `to_raw` na typie powinno zwrócić obiekt bazowy
+- Wywołanie `to_string` na typie powinno zwrócić obiekt jako ciąg znaków: może to być ciąg znaków w przypadku `AgentText`, ale w innych przypadkach będzie to ścieżka serializowanej wersji obiektu.
+- Wyświetlenie go w kernelu ipythona powinno poprawnie wyświetlić obiekt
 
 ### AgentText
 

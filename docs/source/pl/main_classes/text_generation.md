@@ -14,22 +14,17 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Generation
+# Generowanie
 
-Each framework has a generate method for text generation implemented in their respective `GenerationMixin` class:
+Każdy framework posiada metodę generowania tekstu zaimplementowaną w odpowiedniej klasie `GenerationMixin`:
 
-- PyTorch [`~generation.GenerationMixin.generate`] is implemented in [`~generation.GenerationMixin`].
-- TensorFlow [`~generation.TFGenerationMixin.generate`] is implemented in [`~generation.TFGenerationMixin`].
-- Flax/JAX [`~generation.FlaxGenerationMixin.generate`] is implemented in [`~generation.FlaxGenerationMixin`].
+- PyTorch [`~generation.GenerationMixin.generate`] jest zaimplementowany w [`~generation.GenerationMixin`].
+- TensorFlow [`~generation.TFGenerationMixin.generate`] jest zaimplementowany w [`~generation.TFGenerationMixin`].
+- Flax/JAX [`~generation.FlaxGenerationMixin.generate`] jest zaimplementowany w [`~generation.FlaxGenerationMixin`].
 
-Regardless of your framework of choice, you can parameterize the generate method with a [`~generation.GenerationConfig`]
-class instance. Please refer to this class for the complete list of generation parameters, which control the behavior
-of the generation method.
+Niezależnie od wybranego frameworka, można sparametryzować metodę generowania za pomocą instancji klasy [`~generation.GenerationConfig`]. W tej klasie znajduje się pełna lista parametrów, które kontrolują zachowanie generowania.
 
-To learn how to inspect a model's generation configuration, what are the defaults, how to change the parameters ad hoc,
-and how to create and save a customized generation configuration, refer to the
-[text generation strategies guide](../generation_strategies). The guide also explains how to use related features,
-like token streaming.
+Aby dowiedzieć się, jak sprawdzić konfigurację generowania modelu, jakie są wartości domyślne, jak zmienić parametry ad hoc oraz jak utworzyć i zapisać niestandardową konfigurację generowania, zapoznaj się z przewodnikiem [przewodnik po strategiach generowania tekstu](../generation_strategies). Wyjaśnia on również, jak korzystać z powiązanych funkcji, takich jak strumieniowanie tokenów.
 
 ## GenerationConfig
 

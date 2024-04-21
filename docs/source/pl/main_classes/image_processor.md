@@ -14,9 +14,9 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Image Processor
+# Procesory obrazów
 
-An image processor is in charge of preparing input features for vision models and post processing their outputs. This includes transformations such as resizing, normalization, and conversion to PyTorch, TensorFlow, Flax and Numpy tensors. It may also include model specific post-processing such as converting logits to segmentation masks.
+Procesor obrazu jest odpowiedzialny za przygotowanie funkcji wejściowych dla modeli wizyjnych i przetwarzanie ich wyników. Obejmuje to transformacje, takie jak zmiana rozmiaru, normalizacja i konwersja do tensorów PyTorch, TensorFlow, Flax i Numpy. Może również obejmować przetwarzanie końcowe (ang. *post-processing*) specyficzny dla modelu, takie jak konwersja logitów na maski segmentacji.
 
 
 ## ImageProcessingMixin

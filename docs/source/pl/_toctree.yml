@@ -225,47 +225,47 @@
 - sections:
   - sections:
     - local: main_classes/agent
-      title: Agents and Tools
+      title: Agenci i narzędzia
     - local: model_doc/auto
       title: Auto Classes
     - local: main_classes/backbones
       title: Backbones
     - local: main_classes/callback
-      title: Callbacks
+      title: Wywołania zwrotne
     - local: main_classes/configuration
-      title: Configuration
+      title: Konfiguracja
     - local: main_classes/data_collator
-      title: Data Collator
+      title: Kolator danych
     - local: main_classes/keras_callbacks
-      title: Keras callbacks
+      title: Wywołania zwrotne w Kerasie
     - local: main_classes/logging
-      title: Logging
+      title: Rejestracja zdarzeń
     - local: main_classes/model
-      title: Models
+      title: Modele
     - local: main_classes/text_generation
-      title: Text Generation
+      title: Generowanie tekstu
     - local: main_classes/onnx
       title: ONNX
     - local: main_classes/optimizer_schedules
-      title: Optimization
+      title: Optymalizacja
     - local: main_classes/output
-      title: Model outputs
+      title: Wyjście modelu
     - local: main_classes/pipelines
-      title: Pipelines
+      title: Potoki
     - local: main_classes/processors
-      title: Processors
+      title: Procesory
     - local: main_classes/quantization
-      title: Quantization
+      title: Kwantyzacja
     - local: main_classes/tokenizer
-      title: Tokenizer
+      title: Tokenizery
     - local: main_classes/trainer
-      title: Trainer
+      title: Trenerzy
     - local: main_classes/deepspeed
       title: DeepSpeed
     - local: main_classes/feature_extractor
-      title: Feature Extractor
+      title: Ekstraktory cech
     - local: main_classes/image_processor
-      title: Image Processor
+      title: Procesory obrazów
     title: Główne klasy
   - sections:
     - isExpanded: false

@@ -14,41 +14,22 @@ rendered properly in your Markdown viewer.
 
 -->
 
-# Tokenizer
+# Tokenizery
 
-A tokenizer is in charge of preparing the inputs for a model. The library contains tokenizers for all the models. Most
-of the tokenizers are available in two flavors: a full python implementation and a "Fast" implementation based on the
-Rust library [🤗 Tokenizers](https://github.com/huggingface/tokenizers). The "Fast" implementations allows:
+Tokenizer jest odpowiedzialny za przygotowanie danych wejściowych dla modelu. Biblioteka zawiera tokenizery dla wszystkich modeli. Większość tokenizerów jest dostępna w dwóch wersjach: pełnej implementacji w Pythonie i "Fast" (pl. *szybkiej*) implementacji opartej na bibliotece Rust [🤗 Tokenizers](https://github.com/huggingface/tokenizers). "Fast" implementacje pozwalają na:
 
-1. a significant speed-up in particular when doing batched tokenization and
-2. additional methods to map between the original string (character and words) and the token space (e.g. getting the
-   index of the token comprising a given character or the span of characters corresponding to a given token). 
+1. znaczne przyspieszenie, w szczególności podczas tokenizacji wsadowej,
+2. dodatkowe metody mapowania między oryginalnym ciągiem znaków (znakami i słowami) a przestrzenią tokenów (np. uzyskanie indeksu tokena zawierającego dany znak lub zakres znaków odpowiadających danemu tokenowi).
 
-The base classes [`PreTrainedTokenizer`] and [`PreTrainedTokenizerFast`]
-implement the common methods for encoding string inputs in model inputs (see below) and instantiating/saving python and
-"Fast" tokenizers either from a local file or directory or from a pretrained tokenizer provided by the library
-(downloaded from HuggingFace's AWS S3 repository). They both rely on
-[`~tokenization_utils_base.PreTrainedTokenizerBase`] that contains the common methods, and
-[`~tokenization_utils_base.SpecialTokensMixin`].
+Klasy bazowe [`PreTrainedTokenizer`] i [`PreTrainedTokenizerFast`] implementują wspólne metody kodowania ciągów znaków w danych wejściowych modelu (patrz poniżej) oraz instancjonowania/zapisywania tokenizerów pythonowskich i "Fast" na bazie danych z lokalnego pliku, katalogu albo z wstępnie wytrenowanego tokenizera dostarczonego przez bibliotekę (pobranej z repozytorium AWS S3 firmy HuggingFace). Oba opierają się na [`~tokenization_utils_base.PreTrainedTokenizerBase`], który zawiera zwykłe metody, oraz [`~tokenization_utils_base.SpecialTokensMixin`].
 
-[`PreTrainedTokenizer`] and [`PreTrainedTokenizerFast`] thus implement the main
-methods for using all the tokenizers:
+Zatem [`PreTrainedTokenizer`] i [`PreTrainedTokenizerFast`] implementują główne metody korzystania ze wszystkich tokenizerów:
 
-- Tokenizing (splitting strings in sub-word token strings), converting tokens strings to ids and back, and
-  encoding/decoding (i.e., tokenizing and converting to integers).
-- Adding new tokens to the vocabulary in a way that is independent of the underlying structure (BPE, SentencePiece...).
-- Managing special tokens (like mask, beginning-of-sentence, etc.): adding them, assigning them to attributes in the
-  tokenizer for easy access and making sure they are not split during tokenization.
+- Tokenizacja (dzielenie ciągów znaków na ciągi tokenów pod-słów), konwersja ciągów tokenów na identyfikatory i z powrotem oraz kodowanie/dekodowanie (tj. tokenizacja i konwersja na liczby całkowite).
+- Dodawanie nowych tokenów do słownika w sposób niezależny od struktury bazowej (BPE, SentencePiece...).
+- Zarządzanie specjalnymi tokenami (takimi jak maska, początek zdania itp.): dodawanie ich, przypisywanie ich do atrybutów w tokenizatorze w celu łatwego dostępu i upewnianie się, że nie zostaną podzielone podczas tokenizacji.
 
-[`BatchEncoding`] holds the output of the
-[`~tokenization_utils_base.PreTrainedTokenizerBase`]'s encoding methods (`__call__`,
-`encode_plus` and `batch_encode_plus`) and is derived from a Python dictionary. When the tokenizer is a pure python
-tokenizer, this class behaves just like a standard python dictionary and holds the various model inputs computed by
-these methods (`input_ids`, `attention_mask`...). When the tokenizer is a "Fast" tokenizer (i.e., backed by
-HuggingFace [tokenizers library](https://github.com/huggingface/tokenizers)), this class provides in addition
-several advanced alignment methods which can be used to map between the original string (character and words) and the
-token space (e.g., getting the index of the token comprising a given character or the span of characters corresponding
-to a given token).
+[`BatchEncoding`] przechowuje dane wyjściowe metod kodowania [`~tokenization_utils_base.PreTrainedTokenizerBase`] (`__call__`, `encode_plus` i `batch_encode_plus`) i pochodzi ze słownika Pythona. Kiedy tokenizator jest tokenizatorem czysto pythonowym, klasa ta zachowuje się jak standardowy słownik pythonowy i przechowuje różne dane wejściowe modelu obliczone przez te metody (`input_ids`, `attention_mask`...). Gdy tokenizer jest "Fast" tokenizerem (tj. wspieranym przez HuggingFace [biblioteka tokenizerów](https://github.com/huggingface/tokenizers)), klasa ta zapewnia dodatkowo kilka zaawansowanych metod dopasowania, które można wykorzystać do mapowania między oryginalnym ciągiem znaków (znakami i słowami) a przestrzenią tokenów (np. uzyskiwanie indeksu tokenu zawierającego dany znak lub zakresu znaków odpowiadających danemu tokenowi).
 
 
 ## PreTrainedTokenizer
@@ -66,8 +47,7 @@ to a given token).
 
 ## PreTrainedTokenizerFast
 
-The [`PreTrainedTokenizerFast`] depend on the [tokenizers](https://huggingface.co/docs/tokenizers) library. The tokenizers obtained from the 🤗 tokenizers library can be
-loaded very simply into 🤗 transformers. Take a look at the [Using tokenizers from 🤗 tokenizers](../fast_tokenizers) page to understand how this is done.
+[`PreTrainedTokenizerFast`] zależą od biblioteki [tokenizers](https://huggingface.co/docs/tokenizers). Tokenizery uzyskane z biblioteki 🤗 Tokenizers, którą można bardzo łatwo wczytać do 🤗 Transformers. Zapoznaj się ze stroną [Używanie tokenizerów z 🤗 Tokenizers](../fast_tokenizers) aby zrozumieć, jak to się robi.
 
 [[autodoc]] PreTrainedTokenizerFast
     - __call__
