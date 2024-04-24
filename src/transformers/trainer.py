@@ -1682,6 +1682,12 @@ class Trainer:
                 )
             fsdp_kwargs = self.args.xla_fsdp_config
             if self.args.fsdp_config["xla_fsdp_grad_ckpt"]:
+                if model.config.use_cache:
+                    logger.warning_once(
+                        "`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`."
+                    )
+                    model.config.use_cache = False
+
                 # Apply gradient checkpointing to auto-wrapped sub-modules if specified
                 def auto_wrapper_callable(m, *args, **kwargs):
                     target_cls = FSDP if not self.is_fsdp_xla_v2_enabled else FSDPv2
@@ -3261,7 +3267,8 @@ class Trainer:
         logger.info(f"Saving model checkpoint to {output_dir}")
         model = self.model
         xm.mark_step()
-        model.to("cpu")
+        if self.args.save_safetensors:
+            model.to("cpu")
 
         if xm.is_master_ordinal():
             os.makedirs(output_dir, exist_ok=True)
@@ -3296,7 +3303,8 @@ class Trainer:
 
         # We moved the model from TPU -> CPU for saving the weights.
         # Now we should move it back to subsequent compute still works.
-        model.to(self.args.device)
+        if self.args.save_safetensors:
+            model.to(self.args.device)
 
     def _save(self, output_dir: Optional[str] = None, state_dict=None):
         # If we are executing this function, we are the process zero, so we don't check for that.
