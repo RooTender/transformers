@@ -401,9 +401,11 @@ class HerbertConverter(Converter):
 
 
 class Qwen2Converter(Converter):
-    def converted(self) -> Tokenizer:
-        vocab = self.original_tokenizer.encoder
-        merges = list(self.original_tokenizer.bpe_ranks.keys())
+    def converted(self, vocab: Dict[str, int] = None, merges: List[Tuple[str, str]] = None) -> Tokenizer:
+        if not vocab:
+            vocab = self.original_tokenizer.encoder
+        if not merges:
+            merges = list(self.original_tokenizer.bpe_ranks.keys())
 
         tokenizer = Tokenizer(
             BPE(
@@ -1395,14 +1397,14 @@ class LlamaConverter(SpmConverter):
     def normalizer(self, proto):
         if getattr(self.original_tokenizer, "legacy", True):
             sequence = []
-            if getattr(self.original_tokenizer, "add_prefix_space"):
+            if getattr(self.original_tokenizer, "add_prefix_space", True):
                 sequence += [normalizers.Prepend(prepend="▁")]
             sequence += [normalizers.Replace(pattern=" ", content="▁")]
             return normalizers.Sequence(sequence)
         return None  # non-legacy, no normalizer
 
     def pre_tokenizer(self, replacement, add_prefix_space):
-        if not self.original_tokenizer.legacy:  # non-legacy, we need a replace
+        if not getattr(self.original_tokenizer, "legacy", True):  # non-legacy, we need a replace
             prepend_scheme = _get_prepend_scheme(add_prefix_space, self.original_tokenizer)
             return pre_tokenizers.Metaspace(replacement=replacement, prepend_scheme=prepend_scheme, split=False)
         return None
