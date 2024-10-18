@@ -21,7 +21,7 @@ from transformers.testing_utils import (
     require_bitsandbytes,
     require_read_token,
     require_torch,
-    require_torch_gpu,
+    require_torch_accelerator,
     slow,
     torch_device,
 )
@@ -103,7 +103,7 @@ class RecurrentGemmaModelTester:
 
         input_mask = None
         if self.use_input_mask:
-            input_mask = torch.tril(torch.ones(self.batch_size, self.seq_length)).to(torch_device)
+            input_mask = torch.tril(torch.ones_like(input_ids).to(torch_device))
 
         token_type_ids = None
         if self.use_token_type_ids:
@@ -298,7 +298,6 @@ class RecurrentGemmaModelTest(ModelTesterMixin, GenerationTesterMixin, PipelineT
     test_model_parallel = False
     test_pruning = False
     test_head_masking = False  # RecurrentGemma does not have attention heads
-    test_model_parallel = False
 
     # Need to remove 0.9 in `test_cpu_offload`
     # This is because we are hitting edge cases with the causal_mask buffer
@@ -306,7 +305,14 @@ class RecurrentGemmaModelTest(ModelTesterMixin, GenerationTesterMixin, PipelineT
 
     # TODO (ydshieh): Check this. See https://app.circleci.com/pipelines/github/huggingface/transformers/79245/workflows/9490ef58-79c2-410d-8f51-e3495156cf9c/jobs/1012146
     def is_pipeline_test_to_skip(
-        self, pipeline_test_casse_name, config_class, model_architecture, tokenizer_name, processor_name
+        self,
+        pipeline_test_case_name,
+        config_class,
+        model_architecture,
+        tokenizer_name,
+        image_processor_name,
+        feature_extractor_name,
+        processor_name,
     ):
         return True
 
@@ -329,64 +335,65 @@ class RecurrentGemmaModelTest(ModelTesterMixin, GenerationTesterMixin, PipelineT
             config_and_inputs[0].position_embedding_type = type
             self.model_tester.create_and_check_model(*config_and_inputs)
 
+    @unittest.skip(reason="Fast init from base not tested for RecurrentGemma")
     def test_save_load_fast_init_from_base(self):
         pass
 
-    @unittest.skip("RecurrentGemma does not return pkv")
+    @unittest.skip(reason="RecurrentGemma does not return pkv")
     def test_past_key_values_format(self):
         pass
 
-    @unittest.skip("RecurrentGemma only supports sdpa")
+    @unittest.skip(reason="RecurrentGemma only supports sdpa")
     def test_eager_matches_sdpa_generate(self):
         pass
 
-    @unittest.skip("RecurrentGemma only supports sdpa")
+    @unittest.skip(reason="RecurrentGemma only supports sdpa")
     def test_eager_matches_sdpa_inference(self):
         pass
 
-    @unittest.skip("RecurrentGemma does not return the cache")
+    @unittest.skip(reason="RecurrentGemma does not return the cache")
     def test_contrastive_generate_low_memory(self):
         pass
 
-    @unittest.skip("RecurrentGemma does not return the cache")
+    @unittest.skip(reason="RecurrentGemma does not return the cache")
     def test_contrastive_generate_dict_outputs_use_cache(self):
         pass
 
-    @unittest.skip("RecurrentGemma does not return the cache")
+    @unittest.skip(reason="RecurrentGemma does not return the cache")
     def test_contrastive_generate(self):
         pass
 
-    @unittest.skip("SQRBound is known to have issues with gc")
+    @unittest.skip(reason="SQRBound is known to have issues with gc")
     def test_training_gradient_checkpointing_use_reentrant_false(self):
         pass
 
     def _check_attentions_for_generate(self, *args, **kwargs):
         return True  # Model does not return attention
 
-    @unittest.skip("Past key values are not returned")
+    @unittest.skip(reason="Past key values are not returned")
     def test_prompt_lookup_decoding_matches_greedy_search(self):
         pass
 
-    @unittest.skip("Past key values are not returned")
+    @unittest.skip(reason="Past key values are not returned")
     def test_model_parallelism(self):
         pass
 
-    @unittest.skip("Past key values are not returned")
+    @unittest.skip(reason="Past key values are not returned")
     def test_model_parallel_beam_search(self):
         pass
 
     def _check_past_key_values_for_generate(self, *args, **kwargs):
         return True
 
-    @unittest.skip("Rely on `past_key_values` to crop the assistant pkv. Not supported")
+    @unittest.skip(reason="Rely on `past_key_values` to crop the assistant pkv. Not supported")
     def test_assisted_decoding_matches_greedy_search(self):
         pass
 
-    @unittest.skip("RecurrentGemma's output different if you pad left or right. This is expected")
+    @unittest.skip(reason="RecurrentGemma's output different if you pad left or right. This is expected")
     def test_left_padding_compatibility(self):
         pass
 
-    @unittest.skip("Relies on `past_key_values` returned by the model. Not supported with recurrent gemma")
+    @unittest.skip(reason="Relies on `past_key_values` returned by the model. Not supported with recurrent gemma")
     def test_assisted_decoding_sample(self):
         pass
 
@@ -409,12 +416,16 @@ class RecurrentGemmaModelTest(ModelTesterMixin, GenerationTesterMixin, PipelineT
                 [expected_shape] * len(iter_hidden_states),
             )
 
-    @unittest.skip("TODO @arthurzucker not super important and failing.")
+    @unittest.skip(reason="TODO @arthurzucker not super important and failing.")
     def test_initialization(self):
         pass
 
+    @unittest.skip(reason="RecurrentGemma does not support generating with input embeddings (missing position_ids)")
+    def test_inputs_embeds_matches_input_ids_with_generate(self):
+        pass
 
-@require_torch_gpu
+
+@require_torch_accelerator
 @slow
 class RecurrentGemmaIntegrationTest(unittest.TestCase):
     input_text = ["Hello I am doing", "Hi today"]

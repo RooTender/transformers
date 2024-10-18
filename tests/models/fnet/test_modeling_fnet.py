@@ -295,13 +295,19 @@ class FNetModelTest(ModelTesterMixin, PipelineTesterMixin, unittest.TestCase):
     # Skip Tests
     test_pruning = False
     test_head_masking = False
-    test_pruning = False
 
     # TODO: Fix the failed tests
     def is_pipeline_test_to_skip(
-        self, pipeline_test_casse_name, config_class, model_architecture, tokenizer_name, processor_name
+        self,
+        pipeline_test_case_name,
+        config_class,
+        model_architecture,
+        tokenizer_name,
+        image_processor_name,
+        feature_extractor_name,
+        processor_name,
     ):
-        if pipeline_test_casse_name == "QAPipelineTests" and not tokenizer_name.endswith("Fast"):
+        if pipeline_test_case_name == "QAPipelineTests" and not tokenizer_name.endswith("Fast"):
             return True
 
         return False
@@ -321,6 +327,7 @@ class FNetModelTest(ModelTesterMixin, PipelineTesterMixin, unittest.TestCase):
         return inputs_dict
 
     # Overriden Tests
+    @unittest.skip
     def test_attention_outputs(self):
         pass
 

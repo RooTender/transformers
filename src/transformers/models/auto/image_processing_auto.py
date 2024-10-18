@@ -59,6 +59,7 @@ else:
             ("blip", ("BlipImageProcessor",)),
             ("blip-2", ("BlipImageProcessor",)),
             ("bridgetower", ("BridgeTowerImageProcessor",)),
+            ("chameleon", ("ChameleonImageProcessor",)),
             ("chinese_clip", ("ChineseCLIPImageProcessor",)),
             ("clip", ("CLIPImageProcessor",)),
             ("clipseg", ("ViTImageProcessor", "ViTImageProcessorFast")),
@@ -85,19 +86,25 @@ else:
             ("glpn", ("GLPNImageProcessor",)),
             ("grounding-dino", ("GroundingDinoImageProcessor",)),
             ("groupvit", ("CLIPImageProcessor",)),
+            ("hiera", ("BitImageProcessor",)),
             ("idefics", ("IdeficsImageProcessor",)),
             ("idefics2", ("Idefics2ImageProcessor",)),
+            ("idefics3", ("Idefics3ImageProcessor",)),
             ("imagegpt", ("ImageGPTImageProcessor",)),
             ("instructblip", ("BlipImageProcessor",)),
+            ("instructblipvideo", ("InstructBlipVideoImageProcessor",)),
             ("kosmos-2", ("CLIPImageProcessor",)),
             ("layoutlmv2", ("LayoutLMv2ImageProcessor",)),
             ("layoutlmv3", ("LayoutLMv3ImageProcessor",)),
             ("levit", ("LevitImageProcessor",)),
             ("llava", ("CLIPImageProcessor",)),
             ("llava_next", ("LlavaNextImageProcessor",)),
+            ("llava_next_video", ("LlavaNextVideoImageProcessor",)),
+            ("llava_onevision", ("LlavaOnevisionImageProcessor",)),
             ("mask2former", ("Mask2FormerImageProcessor",)),
             ("maskformer", ("MaskFormerImageProcessor",)),
             ("mgp-str", ("ViTImageProcessor", "ViTImageProcessorFast")),
+            ("mllama", ("MllamaImageProcessor",)),
             ("mobilenet_v1", ("MobileNetV1ImageProcessor",)),
             ("mobilenet_v2", ("MobileNetV2ImageProcessor",)),
             ("mobilevit", ("MobileViTImageProcessor",)),
@@ -109,11 +116,14 @@ else:
             ("owlvit", ("OwlViTImageProcessor",)),
             ("perceiver", ("PerceiverImageProcessor",)),
             ("pix2struct", ("Pix2StructImageProcessor",)),
+            ("pixtral", ("PixtralImageProcessor",)),
             ("poolformer", ("PoolFormerImageProcessor",)),
             ("pvt", ("PvtImageProcessor",)),
             ("pvt_v2", ("PvtImageProcessor",)),
+            ("qwen2_vl", ("Qwen2VLImageProcessor",)),
             ("regnet", ("ConvNextImageProcessor",)),
             ("resnet", ("ConvNextImageProcessor",)),
+            ("rt_detr", "RTDetrImageProcessor"),
             ("sam", ("SamImageProcessor",)),
             ("segformer", ("SegformerImageProcessor",)),
             ("seggpt", ("SegGptImageProcessor",)),
@@ -139,6 +149,7 @@ else:
             ("vitmatte", ("VitMatteImageProcessor",)),
             ("xclip", ("CLIPImageProcessor",)),
             ("yolos", ("YolosImageProcessor",)),
+            ("zoedepth", ("ZoeDepthImageProcessor",)),
         ]
     )
 
@@ -154,7 +165,6 @@ for model_type, image_processors in IMAGE_PROCESSOR_MAPPING_NAMES.items():
         fast_image_processor_class = fast_image_processor_class[0]
 
     IMAGE_PROCESSOR_MAPPING_NAMES[model_type] = (slow_image_processor_class, fast_image_processor_class)
-
 
 IMAGE_PROCESSOR_MAPPING = _LazyAutoMapping(CONFIG_MAPPING_NAMES, IMAGE_PROCESSOR_MAPPING_NAMES)
 
@@ -398,7 +408,7 @@ class AutoImageProcessor:
             kwargs["token"] = use_auth_token
 
         config = kwargs.pop("config", None)
-        use_fast = kwargs.pop("use_fast", False)
+        use_fast = kwargs.pop("use_fast", None)
         trust_remote_code = kwargs.pop("trust_remote_code", None)
         kwargs["_from_auto"] = True
 
@@ -421,7 +431,9 @@ class AutoImageProcessor:
         # If we don't find the image processor class in the image processor config, let's try the model config.
         if image_processor_class is None and image_processor_auto_map is None:
             if not isinstance(config, PretrainedConfig):
-                config = AutoConfig.from_pretrained(pretrained_model_name_or_path, **kwargs)
+                config = AutoConfig.from_pretrained(
+                    pretrained_model_name_or_path, trust_remote_code=trust_remote_code, **kwargs
+                )
             # It could be in `config.image_processor_type``
             image_processor_class = getattr(config, "image_processor_type", None)
             if hasattr(config, "auto_map") and "AutoImageProcessor" in config.auto_map:
@@ -429,10 +441,11 @@ class AutoImageProcessor:
 
         if image_processor_class is not None:
             # Update class name to reflect the use_fast option. If class is not found, None is returned.
-            if use_fast and not image_processor_class.endswith("Fast"):
-                image_processor_class += "Fast"
-            elif not use_fast and image_processor_class.endswith("Fast"):
-                image_processor_class = image_processor_class[:-4]
+            if use_fast is not None:
+                if use_fast and not image_processor_class.endswith("Fast"):
+                    image_processor_class += "Fast"
+                elif not use_fast and image_processor_class.endswith("Fast"):
+                    image_processor_class = image_processor_class[:-4]
             image_processor_class = image_processor_class_from_name(image_processor_class)
 
         has_remote_code = image_processor_auto_map is not None

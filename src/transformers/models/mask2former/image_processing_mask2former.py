@@ -772,7 +772,7 @@ class Mask2FormerImageProcessor(BaseImageProcessor):
             ignore_index,
             do_reduce_labels,
             return_tensors,
-            input_data_format=input_data_format,
+            input_data_format=data_format,
         )
         return encoded_inputs
 
@@ -935,7 +935,7 @@ class Mask2FormerImageProcessor(BaseImageProcessor):
         if segmentation_maps is not None:
             mask_labels = []
             class_labels = []
-            pad_size = get_max_height_width(pixel_values_list)
+            pad_size = get_max_height_width(pixel_values_list, input_data_format=input_data_format)
             # Convert to list of binary masks and labels
             for idx, segmentation_map in enumerate(segmentation_maps):
                 segmentation_map = to_numpy_array(segmentation_map)

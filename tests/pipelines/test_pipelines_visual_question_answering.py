@@ -55,8 +55,20 @@ else:
 class VisualQuestionAnsweringPipelineTests(unittest.TestCase):
     model_mapping = MODEL_FOR_VISUAL_QUESTION_ANSWERING_MAPPING
 
-    def get_test_pipeline(self, model, tokenizer, processor):
-        vqa_pipeline = pipeline("visual-question-answering", model="hf-internal-testing/tiny-vilt-random-vqa")
+    def get_test_pipeline(
+        self,
+        model,
+        tokenizer=None,
+        image_processor=None,
+        feature_extractor=None,
+        processor=None,
+        torch_dtype="float32",
+    ):
+        vqa_pipeline = pipeline(
+            "visual-question-answering",
+            model="hf-internal-testing/tiny-vilt-random-vqa",
+            torch_dtype=torch_dtype,
+        )
         examples = [
             {
                 "image": Image.open("./tests/fixtures/tests_samples/COCO/000000039769.png"),
@@ -236,6 +248,6 @@ class VisualQuestionAnsweringPipelineTests(unittest.TestCase):
         )
 
     @require_tf
-    @unittest.skip("Visual question answering not implemented in TF")
+    @unittest.skip(reason="Visual question answering not implemented in TF")
     def test_small_model_tf(self):
         pass

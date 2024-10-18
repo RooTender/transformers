@@ -543,9 +543,16 @@ class XLNetModelTest(ModelTesterMixin, GenerationTesterMixin, PipelineTesterMixi
 
     # TODO: Fix the failed tests
     def is_pipeline_test_to_skip(
-        self, pipeline_test_casse_name, config_class, model_architecture, tokenizer_name, processor_name
+        self,
+        pipeline_test_case_name,
+        config_class,
+        model_architecture,
+        tokenizer_name,
+        image_processor_name,
+        feature_extractor_name,
+        processor_name,
     ):
-        if pipeline_test_casse_name == "QAPipelineTests" and not tokenizer_name.endswith("Fast"):
+        if pipeline_test_case_name == "QAPipelineTests" and not tokenizer_name.endswith("Fast"):
             return True
 
         return False
@@ -612,8 +619,8 @@ class XLNetModelTest(ModelTesterMixin, GenerationTesterMixin, PipelineTesterMixi
         config_and_inputs = self.model_tester.prepare_config_and_inputs()
         self.model_tester.create_and_check_xlnet_qa(*config_and_inputs)
 
+    @unittest.skip(reason="xlnet cannot keep gradients in attentions or hidden states")
     def test_retain_grad_hidden_states_attentions(self):
-        # xlnet cannot keep gradients in attentions or hidden states
         return
 
     # overwrite from test_modeling_common

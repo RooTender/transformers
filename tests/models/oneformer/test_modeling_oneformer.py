@@ -247,9 +247,16 @@ class OneFormerModelTest(ModelTesterMixin, PipelineTesterMixin, unittest.TestCas
 
     # TODO: Fix the failed tests when this model gets more usage
     def is_pipeline_test_to_skip(
-        self, pipeline_test_casse_name, config_class, model_architecture, tokenizer_name, processor_name
+        self,
+        pipeline_test_case_name,
+        config_class,
+        model_architecture,
+        tokenizer_name,
+        image_processor_name,
+        feature_extractor_name,
+        processor_name,
     ):
-        if pipeline_test_casse_name == "FeatureExtractionPipelineTests":
+        if pipeline_test_case_name == "FeatureExtractionPipelineTests":
             return True
 
         return False
@@ -377,7 +384,7 @@ class OneFormerModelTest(ModelTesterMixin, PipelineTesterMixin, unittest.TestCas
 
     def test_training(self):
         if not self.model_tester.is_training:
-            return
+            self.skipTest(reason="model_tester.is_training is set to False")
         # only OneFormerForUniversalSegmentation has the loss
         model_class = self.all_model_classes[1]
         (

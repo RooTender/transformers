@@ -186,9 +186,11 @@ class XCLIPVisionModelTest(ModelTesterMixin, unittest.TestCase):
         config_and_inputs = self.model_tester.prepare_config_and_inputs()
         self.model_tester.create_and_check_model(*config_and_inputs)
 
+    @unittest.skip
     def test_training(self):
         pass
 
+    @unittest.skip
     def test_training_gradient_checkpointing(self):
         pass
 
@@ -420,9 +422,11 @@ class XCLIPTextModelTest(ModelTesterMixin, unittest.TestCase):
         config_and_inputs = self.model_tester.prepare_config_and_inputs()
         self.model_tester.create_and_check_model(*config_and_inputs)
 
+    @unittest.skip
     def test_training(self):
         pass
 
+    @unittest.skip
     def test_training_gradient_checkpointing(self):
         pass
 
@@ -596,7 +600,7 @@ class XCLIPModelTest(ModelTesterMixin, PipelineTesterMixin, unittest.TestCase):
 
     def _create_and_check_torchscript(self, config, inputs_dict):
         if not self.test_torchscript:
-            return
+            self.skipTest(reason="test_torchscript is set to False")
 
         configs_no_init = _config_zero_init(config)  # To be sure we have no Nan
         configs_no_init.torchscript = True
@@ -727,3 +731,39 @@ class XCLIPModelIntegrationTest(unittest.TestCase):
         expected_logits = torch.tensor([[14.0181, 20.2771, 14.4776]], device=torch_device)
 
         self.assertTrue(torch.allclose(outputs.logits_per_video, expected_logits, atol=1e-3))
+
+    @slow
+    def test_inference_interpolate_pos_encoding(self):
+        # XCLIP models have an `interpolate_pos_encoding` argument in their forward method,
+        # allowing to interpolate the pre-trained position embeddings in order to use
+        # the model on higher resolutions. The DINO model by Facebook AI leverages this
+        # to visualize self-attention on higher resolution images.
+        model = XCLIPModel.from_pretrained("microsoft/xclip-base-patch32").to(torch_device)
+
+        processor = XCLIPProcessor.from_pretrained(
+            "microsoft/xclip-base-patch32", size=180, crop_size={"height": 180, "width": 180}
+        )
+
+        video = prepare_video()
+        inputs = processor(text="what's in the video", videos=video, return_tensors="pt").to(torch_device)
+
+        # interpolate_pos_encodiung false should return value error
+        with self.assertRaises(ValueError, msg="doesn't match model"):
+            with torch.no_grad():
+                model(**inputs, interpolate_pos_encoding=False)
+        # forward pass
+        with torch.no_grad():
+            outputs = model(**inputs, interpolate_pos_encoding=True)
+
+        # verify the logits
+        expected_shape = torch.Size((8, 26, 768))
+
+        self.assertEqual(outputs.vision_model_output.last_hidden_state.shape, expected_shape)
+
+        expected_slice = torch.tensor(
+            [[0.0126, 0.2109, 0.0609], [0.0448, 0.5862, -0.1688], [-0.0881, 0.8525, -0.3044]]
+        ).to(torch_device)
+
+        self.assertTrue(
+            torch.allclose(outputs.vision_model_output.last_hidden_state[0, :3, :3], expected_slice, atol=1e-4)
+        )

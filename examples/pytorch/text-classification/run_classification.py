@@ -47,7 +47,7 @@ from transformers.utils.versions import require_version
 
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
-check_min_version("4.42.0.dev0")
+check_min_version("4.46.0.dev0")
 
 require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/text-classification/requirements.txt")
 
@@ -132,6 +132,10 @@ class DataTrainingArguments:
                 "than this will be truncated, sequences shorter will be padded."
             )
         },
+    )
+    preprocessing_num_workers: Optional[int] = field(
+        default=None,
+        metadata={"help": "The number of processes to use for the preprocessing."},
     )
     overwrite_cache: bool = field(
         default=False, metadata={"help": "Overwrite the cached preprocessed datasets or not."}
@@ -573,6 +577,7 @@ def main():
         raw_datasets = raw_datasets.map(
             preprocess_function,
             batched=True,
+            num_proc=data_args.preprocessing_num_workers,
             load_from_cache_file=not data_args.overwrite_cache,
             desc="Running tokenizer on dataset",
         )
@@ -669,7 +674,7 @@ def main():
         train_dataset=train_dataset if training_args.do_train else None,
         eval_dataset=eval_dataset if training_args.do_eval else None,
         compute_metrics=compute_metrics,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         data_collator=data_collator,
     )
 
